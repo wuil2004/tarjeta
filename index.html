@@ -2,15 +2,920 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>💜 Happy Birthday Yoss! · BTS Festa</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --primary-purple: #9d4edd;
+      --dark-purple: #0f051d;
+      --deep-violet: #240046;
+      --neon-glow: #c77dff;
+      --bts-magenta: #e0aaff;
+      --gold-accent: #ffd166;
+      --card-bg: rgba(25, 10, 45, 0.72);
+      --glass-border: rgba(214, 163, 255, 0.35);
+      --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-main);
+      color: #fff;
+      background-color: var(--dark-purple);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* CANVAS DE GALAXIA MIKROKOSMOS */
+    #galaxyCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* EFECTO HAZ DE LUZ ARMY BOMB */
+    .light-beams {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      background: radial-gradient(circle at 50% 20%, rgba(199, 125, 255, 0.35) 0%, transparent 65%),
+                  conic-gradient(from 180deg at 50% 100%, transparent 40%, rgba(157, 78, 221, 0.3) 48%, rgba(224, 170, 255, 0.4) 50%, rgba(157, 78, 221, 0.3) 52%, transparent 60%);
+    }
+
+    .light-beams.active {
+      opacity: 1;
+      animation: strobeConcert 2.8s infinite alternate ease-in-out;
+    }
+
+    @keyframes strobeConcert {
+      0% { transform: scale(1) rotate(-5deg); filter: hue-rotate(0deg); }
+      50% { transform: scale(1.08) rotate(3deg); filter: hue-rotate(25deg); }
+      100% { transform: scale(1) rotate(-3deg); filter: hue-rotate(-20deg); }
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 14px;
+    }
+
+    .screen {
+      display: none;
+      width: 100%;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .screen.active {
+      display: block;
+      animation: fadeInScale 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeInScale {
+      from { opacity: 0; transform: scale(0.92) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* ========================================================
+       PANTALLA 1: TICKET VIP BTS PARA YOSS
+       ======================================================== */
+    .ticket-container {
+      perspective: 1200px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .ticket-card {
+      width: 100%;
+      max-width: 440px;
+      background: linear-gradient(145deg, rgba(45, 12, 75, 0.92), rgba(18, 5, 35, 0.96));
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 32px 24px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(157, 78, 221, 0.35);
+      backdrop-filter: blur(16px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .ticket-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85), 0 0 45px rgba(199, 125, 255, 0.5);
+    }
+
+    .ticket-card::before {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: -60%;
+      width: 220%;
+      height: 220%;
+      background: linear-gradient(120deg, transparent 35%, rgba(255, 255, 255, 0.12) 48%, rgba(200, 150, 255, 0.25) 50%, transparent 60%);
+      animation: shineSweep 5s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes shineSweep {
+      0% { transform: translateY(-50%) rotate(25deg); }
+      100% { transform: translateY(50%) rotate(25deg); }
+    }
+
+    .ticket-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px dashed rgba(224, 170, 255, 0.35);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+
+    .bts-logo-svg {
+      width: 32px;
+      height: 38px;
+      color: var(--bts-magenta);
+    }
+
+    .badge-festa {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: var(--gold-accent);
+      background: rgba(255, 209, 102, 0.12);
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 209, 102, 0.3);
+      font-weight: 700;
+    }
+
+    .ticket-subtitle {
+      font-size: 0.85rem;
+      letter-spacing: 4px;
+      color: var(--bts-magenta);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .ticket-name {
+      font-size: 3.8rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .glow-purple {
+      background: linear-gradient(135deg, #ffffff 10%, #e0aaff 60%, #c77dff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 16px rgba(199, 125, 255, 0.8));
+    }
+
+    .ticket-msg {
+      font-size: 0.98rem;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .ticket-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.32);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 26px;
+      text-align: left;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .ticket-details span {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 1.5px;
+      color: rgba(224, 170, 255, 0.7);
+      margin-bottom: 2px;
+    }
+
+    .ticket-details strong {
+      font-size: 0.92rem;
+      color: #fff;
+    }
+
+    .ticket-stub {
+      border-top: 1px dashed rgba(224, 170, 255, 0.35);
+      padding-top: 22px;
+    }
+
+    .glow-btn {
+      width: 100%;
+      padding: 16px 24px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #7b2cbf, #9d4edd, #c77dff);
+      border: 0;
+      border-radius: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(157, 78, 221, 0.6);
+      transition: all 0.25s ease;
+    }
+
+    .glow-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(199, 125, 255, 0.85);
+    }
+
+    .glow-btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-icon {
+      font-size: 1.25rem;
+      animation: pulseBeat 1.2s infinite;
+    }
+
+    @keyframes pulseBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+
+    .ticket-hint {
+      font-size: 0.75rem;
+      color: rgba(224, 170, 255, 0.65);
+      margin-top: 10px;
+    }
+
+    /* ========================================================
+       PANTALLA 2: TARJETA PRINCIPAL FESTA
+       ======================================================== */
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(20, 5, 38, 0.82);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .bts-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      color: var(--bts-magenta);
+    }
+
+    .logo-bts.mini, .logo-army.mini {
+      width: 18px;
+      height: 22px;
+      color: var(--neon-glow);
+    }
+
+    .top-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .control-btn {
+      background: rgba(157, 78, 221, 0.22);
+      border: 1px solid rgba(224, 170, 255, 0.4);
+      color: #fff;
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.25s ease;
+    }
+
+    .control-btn:hover {
+      background: rgba(157, 78, 221, 0.45);
+      border-color: #fff;
+    }
+
+    .control-btn.active {
+      background: linear-gradient(135deg, #7b2cbf, #c77dff);
+      box-shadow: 0 0 20px rgba(199, 125, 255, 0.8);
+    }
+
+    .sound-wave {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 14px;
+    }
+
+    .sound-wave span {
+      width: 3px;
+      height: 100%;
+      background: var(--bts-magenta);
+      border-radius: 2px;
+      animation: soundBar 1s ease-in-out infinite alternate;
+    }
+
+    .sound-wave span:nth-child(1) { animation-delay: 0.1s; }
+    .sound-wave span:nth-child(2) { animation-delay: 0.3s; }
+    .sound-wave span:nth-child(3) { animation-delay: 0.2s; }
+    .sound-wave span:nth-child(4) { animation-delay: 0.4s; }
+
+    .control-btn:not(.playing-music) .sound-wave span {
+      animation: none;
+      height: 3px;
+    }
+
+    @keyframes soundBar {
+      0% { height: 3px; }
+      100% { height: 14px; }
+    }
+
+    /* TARJETA HERO */
+    .hero-card {
+      position: relative;
+      background: linear-gradient(160deg, rgba(36, 12, 60, 0.88) 0%, rgba(15, 4, 30, 0.96) 100%);
+      border: 1px solid var(--glass-border);
+      border-radius: 30px;
+      padding: 34px 22px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 50px rgba(123, 44, 191, 0.35);
+      backdrop-filter: blur(16px);
+      margin-bottom: 30px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #c77dff, #ffd166, #c77dff, transparent);
+    }
+
+    .anniversary-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      color: var(--gold-accent);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .main-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: 18px;
+    }
+
+    .sub-greeting {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--bts-magenta);
+    }
+
+    .name-highlight {
+      font-size: clamp(3rem, 11vw, 4.8rem);
+      font-weight: 900;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 30%, #e0aaff 60%, #c77dff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 25px rgba(199, 125, 255, 0.85));
+    }
+
+    .typewriter-box {
+      min-height: 80px;
+      margin: 10px auto 26px;
+      max-width: 600px;
+    }
+
+    .letter-text {
+      font-size: 1.08rem;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.92);
+      font-weight: 400;
+    }
+
+    /* ========================================================
+       PASTEL DE CUMPLEAÑOS INTERACTIVO
+       ======================================================== */
+    .cake-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 15px;
+    }
+
+    .cake {
+      position: relative;
+      width: 170px;
+      height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: 22px;
+    }
+
+    .candles-row {
+      display: flex;
+      gap: 16px;
+      position: absolute;
+      top: 10px;
+      z-index: 5;
+    }
+
+    .candle {
+      position: relative;
+      width: 10px;
+      height: 32px;
+      background: repeating-linear-gradient(45deg, #fff, #fff 5px, #c77dff 5px, #c77dff 10px);
+      border-radius: 4px 4px 1px 1px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    }
+
+    .wick {
+      position: absolute;
+      top: -6px;
+      left: 4px;
+      width: 2px;
+      height: 6px;
+      background: #333;
+    }
+
+    .flame {
+      position: absolute;
+      top: -24px;
+      left: -2px;
+      width: 14px;
+      height: 22px;
+      background: radial-gradient(ellipse at bottom, #fff 15%, #ffd166 45%, #ff5400 85%);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      filter: drop-shadow(0 0 10px #ffd166) drop-shadow(0 0 18px #ff7b00);
+      animation: flicker 0.4s infinite alternate ease-in-out;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .candle:nth-child(2) .flame { animation-delay: 0.12s; }
+    .candle:nth-child(3) .flame { animation-delay: 0.25s; }
+    .candle:nth-child(4) .flame { animation-delay: 0.08s; }
+
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-3deg); }
+      100% { transform: scale(1.15, 0.92) rotate(4deg); }
+    }
+
+    .smoke {
+      position: absolute;
+      top: -20px;
+      left: 2px;
+      width: 6px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .cake.extinguished .flame {
+      opacity: 0;
+      transform: scale(0.2);
+    }
+
+    .cake.extinguished .smoke {
+      animation: smokePuff 1.2s forwards ease-out;
+    }
+
+    @keyframes smokePuff {
+      0% { opacity: 0.8; transform: translateY(0) scale(1); }
+      50% { opacity: 0.5; transform: translateY(-25px) scale(3.5); filter: blur(3px); }
+      100% { opacity: 0; transform: translateY(-50px) scale(6); filter: blur(6px); }
+    }
+
+    .cake-tier {
+      width: 100%;
+      position: relative;
+      border-radius: 12px;
+      box-shadow: inset 0 -4px 8px rgba(0,0,0,0.3);
+    }
+
+    .cake-tier.top {
+      width: 90px;
+      height: 32px;
+      background: linear-gradient(180deg, #f3e8ff 0%, #d8b4fe 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 4;
+    }
+
+    .cake-initial {
+      font-weight: 900;
+      color: #7b2cbf;
+      font-size: 1.1rem;
+    }
+
+    .cake-tier.mid {
+      width: 130px;
+      height: 36px;
+      background: linear-gradient(180deg, #c084fc 0%, #9333ea 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    .ribbon {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      color: #fff;
+      font-weight: 700;
+      background: rgba(59, 7, 100, 0.6);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .cake-tier.base {
+      width: 165px;
+      height: 38px;
+      background: linear-gradient(180deg, #7e22ce 0%, #581c87 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .stars-deco {
+      font-size: 0.6rem;
+      color: var(--gold-accent);
+      letter-spacing: 5px;
+    }
+
+    .cake-plate {
+      width: 195px;
+      height: 12px;
+      background: linear-gradient(90deg, #999, #eee, #fff, #eee, #999);
+      border-radius: 50%;
+      margin-top: -6px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+      z-index: 1;
+    }
+
+    .cake-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .cake-btn {
+      background: linear-gradient(135deg, #6b21a8, #9333ea);
+      color: #fff;
+      border: 1px solid rgba(224, 170, 255, 0.5);
+      padding: 10px 22px;
+      border-radius: 25px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 6px 20px rgba(107, 33, 168, 0.5);
+      transition: all 0.25s ease;
+    }
+
+    .cake-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(168, 85, 247, 0.7);
+    }
+
+    .cake-btn.secondary {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: none;
+    }
+
+    .cake-status {
+      font-size: 0.85rem;
+      color: var(--bts-magenta);
+      font-style: italic;
+      margin-top: 4px;
+    }
+
+    /* ========================================================
+       SECCIÓN DE PHOTOCARDS
+       ======================================================== */
+    .photocards-section {
+      margin-bottom: 35px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .section-heading h2 {
+      font-size: 1.6rem;
+      color: #fff;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .section-heading p {
+      font-size: 0.9rem;
+      color: rgba(224, 170, 255, 0.85);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+    }
+
+    .photocard {
+      perspective: 1000px;
+      height: 290px;
+      cursor: pointer;
+    }
+
+    .photocard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+      border-radius: 18px;
+    }
+
+    .photocard.flipped .photocard-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 18px;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--glass-border);
+      overflow: hidden;
+    }
+
+    .card-front {
+      background: linear-gradient(145deg, rgba(40, 15, 70, 0.88), rgba(18, 5, 32, 0.96));
+    }
+
+    .member-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 10px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, rgba(157, 78, 221, 0.4), rgba(224, 170, 255, 0.2));
+      border: 2px solid var(--bts-magenta);
+      box-shadow: 0 0 20px rgba(199, 125, 255, 0.4);
+    }
+
+    .member-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 1.5px;
+      color: var(--gold-accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .member-name {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .member-role {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .flip-hint {
+      font-size: 0.72rem;
+      color: var(--bts-magenta);
+      font-weight: 600;
+    }
+
+    .card-back {
+      background: linear-gradient(145deg, #4a1577, #240046);
+      transform: rotateY(180deg);
+      justify-content: center;
+      text-align: center;
+      padding: 22px 18px;
+    }
+
+    .back-header {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: var(--gold-accent);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .member-message-text {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: #ffffff;
+      font-style: italic;
+      margin-bottom: 14px;
+    }
+
+    .member-sign {
+      font-weight: 800;
+      color: var(--bts-magenta);
+      font-size: 0.95rem;
+    }
+
+    /* FOOTER */
+    .card-footer {
+      text-align: center;
+      background: rgba(18, 5, 32, 0.7);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 26px 20px;
+    }
+
+    .korean-quote {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--bts-magenta);
+      margin-bottom: 14px;
+    }
+
+    .korean-quote span {
+      display: block;
+      font-family: var(--font-main);
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-style: italic;
+      margin-top: 4px;
+    }
+
+    .borahae-message {
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      color: #f3e8ff;
+    }
+
+    .footer-bts-sig {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      color: rgba(224, 170, 255, 0.6);
+      font-weight: 600;
+    }
+
+    /* MODAL */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 2, 16, 0.82);
+      backdrop-filter: blur(8px);
+      display: none;
+      place-items: center;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .modal.active {
+      display: grid;
+      animation: modalFadeIn 0.3s ease forwards;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-box {
+      background: linear-gradient(145deg, #300f54, #150528);
+      border: 1px solid var(--bts-magenta);
+      border-radius: 24px;
+      padding: 32px 24px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(199, 125, 255, 0.5);
+    }
+
+    .modal-sparkles {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .modal-box h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .modal-box p {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+
+    .modal-btn {
+      background: linear-gradient(135deg, #7b2cbf, #c77dff);
+      color: #fff;
+      border: 0;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translate(-50%, 120px);
+      background: rgba(30, 8, 52, 0.95);
+      border: 1px solid var(--bts-magenta);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(199, 125, 255, 0.4);
+      z-index: 100;
+      pointer-events: none;
+      transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+
+    .toast.show {
+      transform: translate(-50%, 0);
+    }
+
+    @media (max-width: 600px) {
+      .ticket-name { font-size: 3rem; }
+      .card-header { flex-direction: column; align-items: stretch; text-align: center; }
+      .bts-banner { justify-content: center; }
+      .top-controls { justify-content: center; }
+      .hero-card { padding: 26px 16px; }
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Fondo de Galaxia / Mikrokosmos Interactivo -->
+  <!-- Fondo de Galaxia / Mikrokosmos -->
   <canvas id="galaxyCanvas"></canvas>
   <div class="light-beams" id="lightBeams"></div>
 
@@ -21,7 +926,7 @@
         <div class="ticket-card">
           <div class="ticket-header">
             <div class="bts-logo-svg">
-              <svg viewBox="0 0 100 120" class="logo-bts">
+              <svg viewBox="0 0 100 120" class="logo-bts" style="width:100%;height:100%;">
                 <path d="M12 10 L44 20 L44 100 L12 90 Z" fill="currentColor"/>
                 <path d="M88 10 L56 20 L56 100 L88 90 Z" fill="currentColor"/>
               </svg>
@@ -67,7 +972,6 @@
           </svg>
         </div>
         
-        <!-- Controles rápidos: Audio y ARMY Bomb -->
         <div class="top-controls">
           <button id="armyBombBtn" class="control-btn" title="Modo Concierto ARMY Bomb">
             <span class="bomb-icon">💣</span>
@@ -85,7 +989,6 @@
 
       <!-- TARJETA CENTRAL HERO -->
       <div class="hero-card">
-        <div class="hologram-effect"></div>
         <div class="hero-content">
           <span class="anniversary-tag">✨ HAPPY BIRTHDAY TO OUR STAR ✨</span>
           <h1 class="main-title">
@@ -100,7 +1003,6 @@
           <!-- PASTEL DE CUMPLEAÑOS BTS INTERACTIVO -->
           <div class="cake-stage">
             <div class="cake" id="interactiveCake">
-              <!-- Velas mágicas -->
               <div class="candles-row">
                 <div class="candle c1"><div class="wick"></div><div class="flame"></div><div class="smoke"></div></div>
                 <div class="candle c2"><div class="wick"></div><div class="flame"></div><div class="smoke"></div></div>
@@ -108,7 +1010,6 @@
                 <div class="candle c4"><div class="wick"></div><div class="flame"></div><div class="smoke"></div></div>
               </div>
               <div class="cake-tier top">
-                <div class="frosting"></div>
                 <span class="cake-initial">Y</span>
               </div>
               <div class="cake-tier mid">
@@ -137,12 +1038,10 @@
       <section class="photocards-section">
         <div class="section-heading">
           <h2>Mensajes Exclusivos de los Chicos</h2>
-          <p>Toca cada photocard holográfica para voltearla y leer lo que cada integrante le escribió a <strong>Yoss</strong>:</p>
+          <p>Toca cada photocard para voltearla y leer lo que cada integrante le escribió a <strong>Yoss</strong>:</p>
         </div>
 
-        <div class="cards-grid" id="photocardsGrid">
-          <!-- Generado dinámicamente con JS -->
-        </div>
+        <div class="cards-grid" id="photocardsGrid"></div>
       </section>
 
       <!-- CITA DE BTS FINAL -->
@@ -171,6 +1070,397 @@
 
   <div id="toastNotification" class="toast"></div>
 
-  <script src="script.js"></script>
+  <script>
+    // DATOS DE LOS MIEMBROS PARA YOSS
+    const membersData = [
+      {
+        name: "RM",
+        realName: "Kim Namjoon",
+        emoji: "🐨",
+        role: "Líder & Rapero",
+        quote: "“Yoss, eres una estrella brillante en nuestra galaxia. Recuerda siempre amarte a ti misma y que eres el arte de tu propia vida. ¡Feliz cumpleaños!”"
+      },
+      {
+        name: "Jin",
+        realName: "Kim Seokjin",
+        emoji: "🐹",
+        role: "Vocalista & Visual",
+        quote: "“¡Worldwide Handsome te desea el día más radiante, Yoss! Que la vida te regale tanta felicidad como tú regalas con tu sola sonrisa. ¡Y a comer mucho pastel!”"
+      },
+      {
+        name: "SUGA",
+        realName: "Min Yoongi",
+        emoji: "🐱",
+        role: "Rapero & Productor",
+        quote: "“Yoss, que la música, la calma y el éxito te acompañen en cada proyecto de este nuevo año. Tómate hoy un respiro y disfruta tu momento.”"
+      },
+      {
+        name: "j-hope",
+        realName: "Jung Hoseok",
+        emoji: "🐿️",
+        role: "Bailarín & Rapero",
+        quote: "“¡I'm your hope, you're my hope! Yoss, eres una persona llena de luz y energía positiva. ¡Hoy es tu día para brillar al máximo y bailar!”"
+      },
+      {
+        name: "Jimin",
+        realName: "Park Jimin",
+        emoji: "🐥",
+        role: "Vocalista & Bailarín",
+        quote: "“Querida Yoss, que este nuevo año de vida sea tan dulce y mágico como un momento de Serendipity. ¡Te envío un abrazo muy cálido y morado!”"
+      },
+      {
+        name: "V",
+        realName: "Kim Taehyung",
+        emoji: "🐯",
+        role: "Vocalista & Visual",
+        quote: "“Yoss, en este universo de millones de luces, tu existencia tiene un brillo único y precioso. Borahae con todo mi corazón hoy y siempre.”"
+      },
+      {
+        name: "Jung Kook",
+        realName: "Jeon Jungkook",
+        emoji: "🐰",
+        role: "Vocalista & Maknae",
+        quote: "“¡Feliz cumpleaños, Yoss! Eres nuestra Golden ARMY. Nunca dejes de perseguir tus sueños con la pasión que tienes. ¡A celebrar en grande!”"
+      }
+    ];
+
+    const birthdayLetter = "Hoy celebramos la existencia de alguien muy especial: ¡tú, Yoss! Los 7 chicos de BTS y todo el universo ARMY se unen para desearte 365 nuevos días llenos de salud, proyectos cumplidos, risas y amor infinito. Gracias por brillar con tanta fuerza en nuestra galaxia. ¡Borahae, Yoss! 💜✨";
+
+    // MOTOR CANVAS (MIKROKOSMOS & CONFETI)
+    const canvas = document.getElementById('galaxyCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let stars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      stars = [];
+      const count = Math.floor((canvas.width * canvas.height) / 7500);
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 1.8 + 0.5,
+          alpha: Math.random() * 0.8 + 0.2,
+          speed: Math.random() * 0.02 + 0.005,
+          dir: Math.random() > 0.5 ? 1 : -1
+        });
+      }
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const colors = ['#e0aaff', '#c77dff', '#9d4edd', '#7b2cbf', '#ffd166', '#ffffff', '#f472b6'];
+
+    function spawnConfetti(count = 120, x, y) {
+      const ox = x ?? canvas.width / 2;
+      const oy = y ?? canvas.height / 3;
+      for (let i = 0; i < count; i++) {
+        const ang = Math.random() * Math.PI * 2;
+        const vel = Math.random() * 11 + 3;
+        particles.push({
+          x: ox, y: oy,
+          vx: Math.cos(ang) * vel,
+          vy: Math.sin(ang) * vel - 3,
+          size: Math.random() * 9 + 4,
+          c: colors[Math.floor(Math.random() * colors.length)],
+          rot: Math.random() * Math.PI * 2,
+          vRot: (Math.random() - 0.5) * 0.2,
+          life: 260,
+          isHeart: Math.random() < 0.4
+        });
+      }
+    }
+
+    function spawnFloatingHeart() {
+      if (particles.length > 220) return;
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: canvas.height + 20,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: -(Math.random() * 1.2 + 0.6),
+        size: Math.random() * 14 + 10,
+        c: '#d6b3ff',
+        rot: 0,
+        vRot: 0,
+        life: 340,
+        isHeart: true
+      });
+    }
+
+    (function loop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const s of stars) {
+        s.alpha += s.speed * s.dir;
+        if (s.alpha > 0.95 || s.alpha < 0.2) s.dir *= -1;
+        ctx.fillStyle = `rgba(224, 170, 255, ${s.alpha})`;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      if (Math.random() < 0.08) spawnFloatingHeart();
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.life--;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vRot;
+        if (!p.isHeart || p.vy > 0) p.vy += 0.06;
+
+        if (p.life <= 0 || p.y > canvas.height + 40) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.globalAlpha = Math.min(1, p.life / 50);
+
+        if (p.isHeart) {
+          ctx.font = `${p.size}px serif`;
+          ctx.fillText('💜', -p.size / 2, p.size / 2);
+        } else {
+          ctx.fillStyle = p.c;
+          ctx.fillRect(-p.size / 2, -p.size / 3, p.size, p.size * 0.7);
+        }
+        ctx.restore();
+      }
+      requestAnimationFrame(loop);
+    })();
+
+    // TOQUES Y CLICS EN PANTALLA
+    window.addEventListener('click', (e) => {
+      if (e.target.closest('button')) return;
+      spawnConfetti(15, e.clientX, e.clientY);
+    });
+
+    // MÁQUINA DE ESCRIBIR
+    let typeTimer;
+    function startTypewriter(text) {
+      const box = document.getElementById('typewriterText');
+      box.textContent = '';
+      let idx = 0;
+      clearInterval(typeTimer);
+      typeTimer = setInterval(() => {
+        if (idx < text.length) {
+          box.textContent += text.charAt(idx++);
+        } else {
+          clearInterval(typeTimer);
+        }
+      }, 30);
+    }
+
+    // CARGAR PHOTOCARDS
+    const grid = document.getElementById('photocardsGrid');
+    membersData.forEach((m) => {
+      const el = document.createElement('div');
+      el.className = 'photocard';
+      el.innerHTML = `
+        <div class="photocard-inner">
+          <div class="card-front">
+            <span class="member-badge">${m.role}</span>
+            <div class="member-avatar">${m.emoji}</div>
+            <div class="member-info">
+              <div class="member-name">${m.name}</div>
+              <div class="member-role">${m.realName}</div>
+            </div>
+            <div class="flip-hint">✨ Toca para leer el mensaje de ${m.name}</div>
+          </div>
+          <div class="card-back">
+            <div class="back-header">MENSAJE PARA YOSS 💜</div>
+            <p class="member-message-text">${m.quote}</p>
+            <div class="member-sign">— Con amor, ${m.name} (${m.emoji})</div>
+          </div>
+        </div>
+      `;
+      el.addEventListener('click', (e) => {
+        el.classList.toggle('flipped');
+        playChime(660);
+        spawnConfetti(25, e.clientX, e.clientY);
+      });
+      grid.appendChild(el);
+    });
+
+    // SINTETIZADOR DE AUDIO
+    let audioCtx = null;
+    let isMusicActive = false;
+    let loopTimer = null;
+
+    function getAudioCtx() {
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return audioCtx;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function playNote(freq, start, dur, vol = 0.16) {
+      const actx = getAudioCtx();
+      if (!actx) return;
+      try {
+        const osc = actx.createOscillator();
+        const gain = actx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, start);
+        gain.gain.setValueAtTime(vol, start);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+        osc.connect(gain);
+        gain.connect(actx.destination);
+        osc.start(start);
+        osc.stop(start + dur);
+      } catch (err) {}
+    }
+
+    function playChime(freq = 520) {
+      const actx = getAudioCtx();
+      if (actx) playNote(freq, actx.currentTime, 0.4, 0.12);
+    }
+
+    function playBirthdayMelody() {
+      if (!isMusicActive) return;
+      const actx = getAudioCtx();
+      if (!actx) return;
+
+      const now = actx.currentTime + 0.05;
+      const N = {
+        C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23, G4: 392.00, A4: 440.00, B4: 493.88,
+        C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99
+      };
+
+      const melody = [
+        [N.G4, 0.35], [N.G4, 0.2], [N.A4, 0.55], [N.G4, 0.55], [N.C5, 0.55], [N.B4, 1.1],
+        [N.G4, 0.35], [N.G4, 0.2], [N.A4, 0.55], [N.G4, 0.55], [N.D5, 0.55], [N.C5, 1.1],
+        [N.G4, 0.35], [N.G4, 0.2], [N.G5, 0.55], [N.E5, 0.55], [N.C5, 0.55], [N.B4, 0.55], [N.A4, 0.9],
+        [N.F5, 0.35], [N.F5, 0.2], [N.E5, 0.55], [N.C5, 0.55], [N.D5, 0.55], [N.C5, 1.3],
+        [N.E5, 0.4], [N.G5, 0.4], [N.C5, 0.4], [N.D5, 0.6], [N.E5, 0.8], [N.G5, 1.2]
+      ];
+
+      let t = now;
+      melody.forEach(([freq, dur]) => {
+        playNote(freq, t, dur * 1.3, 0.14);
+        t += dur;
+      });
+
+      const totalMs = (t - now + 1.2) * 1000;
+      clearTimeout(loopTimer);
+      loopTimer = setTimeout(() => {
+        if (isMusicActive) playBirthdayMelody();
+      }, totalMs);
+    }
+
+    // BOTÓN DE MÚSICA
+    const musicBtn = document.getElementById('musicToggleBtn');
+    const musicLabel = document.getElementById('musicLabel');
+
+    musicBtn.addEventListener('click', () => {
+      isMusicActive = !isMusicActive;
+      if (isMusicActive) {
+        musicBtn.classList.add('playing-music');
+        musicLabel.textContent = 'Música: ON';
+        showToast('🎵 Reproduciendo melodía para Yoss');
+        playBirthdayMelody();
+      } else {
+        musicBtn.classList.remove('playing-music');
+        musicLabel.textContent = 'Música: OFF';
+        clearTimeout(loopTimer);
+        showToast('Música pausada');
+      }
+    });
+
+    // PASTEL
+    const cake = document.getElementById('interactiveCake');
+    const blowBtn = document.getElementById('blowCandlesBtn');
+    const blowText = document.getElementById('blowText');
+    const cakeStatus = document.getElementById('cakeStatus');
+    const wishModal = document.getElementById('wishModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    let blown = false;
+
+    blowBtn.addEventListener('click', () => {
+      blown = !blown;
+      if (blown) {
+        cake.classList.add('extinguished');
+        blowText.textContent = 'Encender Velas de Nuevo';
+        cakeStatus.textContent = '¡Pide tu más grande deseo para este año, Yoss! ✨';
+        spawnConfetti(260);
+        playChime(880);
+        setTimeout(() => wishModal.classList.add('active'), 650);
+      } else {
+        cake.classList.remove('extinguished');
+        blowText.textContent = 'Soplar las Velitas';
+        cakeStatus.textContent = '¡Velas encendidas de nuevo para celebrar!';
+        playChime(520);
+      }
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      wishModal.classList.remove('active');
+      spawnConfetti(90);
+    });
+
+    document.getElementById('fireConfettiBtn').addEventListener('click', (e) => {
+      spawnConfetti(220, e.clientX, e.clientY);
+      showToast('💜 ¡Lluvia de amor para Yoss!');
+      playChime(780);
+    });
+
+    // ARMY BOMB
+    const armyBombBtn = document.getElementById('armyBombBtn');
+    const lightBeams = document.getElementById('lightBeams');
+    let bombActive = false;
+
+    armyBombBtn.addEventListener('click', () => {
+      bombActive = !bombActive;
+      armyBombBtn.classList.toggle('active', bombActive);
+      lightBeams.classList.toggle('active', bombActive);
+      if (bombActive) {
+        showToast('💣 ¡Modo Concierto ARMY Bomb activado!');
+        spawnConfetti(160);
+        playChime(950);
+      } else {
+        showToast('Modo Concierto apagado');
+      }
+    });
+
+    // ABRIR INVITACIÓN
+    const openBtn = document.getElementById('openTicketBtn');
+    const welcome = document.getElementById('welcomeScreen');
+    const card = document.getElementById('cardScreen');
+
+    openBtn.addEventListener('click', () => {
+      welcome.classList.remove('active');
+      card.classList.add('active');
+
+      isMusicActive = true;
+      musicBtn.classList.add('playing-music');
+      musicLabel.textContent = 'Música: ON';
+      playBirthdayMelody();
+
+      spawnConfetti(220);
+      startTypewriter(birthdayLetter);
+      showToast('🎉 ¡Bienvenida a tu BTS Festa, Yoss!');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // TOAST
+    const toast = document.getElementById('toastNotification');
+    let toastTimer;
+    function showToast(msg) {
+      clearTimeout(toastTimer);
+      toast.textContent = msg;
+      toast.classList.add('show');
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+  </script>
 </body>
 </html>
