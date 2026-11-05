@@ -82,7 +82,7 @@
     .screen {
       display: none;
       width: 100%;
-      max-width: 800px;
+      max-width: 820px;
       margin: 0 auto;
     }
 
@@ -96,9 +96,7 @@
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
-    /* ========================================================
-       PANTALLA 1: TICKET VIP YOSS (FUTURA ING & BANDA DE GUERRA)
-       ======================================================== */
+    /* PANTALLA 1: TICKET VIP YOSS */
     .ticket-container {
       perspective: 1200px;
       display: flex;
@@ -164,7 +162,6 @@
       font-weight: 700;
     }
 
-    /* Badges de honor para Yoss */
     .honors-tags {
       display: flex;
       flex-wrap: wrap;
@@ -215,7 +212,6 @@
       filter: drop-shadow(0 0 16px rgba(199, 125, 255, 0.8));
     }
 
-    /* Barra de progreso de residencias */
     .residency-progress-box {
       background: rgba(0, 0, 0, 0.35);
       border: 1px solid rgba(56, 189, 248, 0.3);
@@ -340,9 +336,7 @@
       margin-top: 10px;
     }
 
-    /* ========================================================
-       PANTALLA 2: TARJETA PRINCIPAL FESTA
-       ======================================================== */
+    /* PANTALLA 2: TARJETA PRINCIPAL */
     .card-header {
       display: flex;
       align-items: center;
@@ -384,14 +378,14 @@
       background: rgba(157, 78, 221, 0.22);
       border: 1px solid rgba(224, 170, 255, 0.4);
       color: #fff;
-      padding: 7px 14px;
+      padding: 7px 13px;
       border-radius: 20px;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       transition: all 0.25s ease;
     }
 
@@ -405,16 +399,15 @@
       box-shadow: 0 0 20px rgba(199, 125, 255, 0.8);
     }
 
-    /* Botón especial de redoble de caja */
-    .control-btn.drum-btn {
-      background: linear-gradient(135deg, rgba(255, 209, 102, 0.25), rgba(157, 78, 221, 0.35));
+    .control-btn.diana-btn {
+      background: linear-gradient(135deg, rgba(255, 209, 102, 0.3), rgba(234, 88, 12, 0.35));
       border-color: var(--gold-accent);
       color: #fff;
     }
 
-    .control-btn.drum-btn:hover {
-      background: linear-gradient(135deg, rgba(255, 209, 102, 0.45), rgba(157, 78, 221, 0.6));
-      transform: scale(1.05);
+    .control-btn.diana-btn:hover {
+      background: linear-gradient(135deg, rgba(255, 209, 102, 0.5), rgba(234, 88, 12, 0.55));
+      transform: scale(1.04);
     }
 
     .sound-wave {
@@ -543,68 +536,91 @@
       font-weight: 400;
     }
 
-    /* WIDGET INTERACTIVO DE CAJA MILITAR / MARCHING DRUM */
-    .marching-snare-widget {
-      background: rgba(20, 6, 38, 0.65);
-      border: 1px dashed rgba(255, 209, 102, 0.4);
-      border-radius: 18px;
-      padding: 16px;
-      margin: 0 auto 26px;
-      max-width: 440px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-align: left;
+    /* PABELLÓN DE BANDA DE GUERRA: 3 DE DIANA Y CIUDADELA */
+    .banda-guerra-box {
+      background: linear-gradient(145deg, rgba(30, 8, 55, 0.8), rgba(15, 3, 30, 0.9));
+      border: 1px solid rgba(255, 209, 102, 0.45);
+      border-radius: 22px;
+      padding: 20px 18px;
+      margin: 0 auto 28px;
+      max-width: 540px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 209, 102, 0.08);
     }
 
-    .snare-icon-box {
-      font-size: 2.4rem;
-      background: rgba(255, 209, 102, 0.12);
-      border-radius: 14px;
-      width: 60px;
-      height: 60px;
+    .banda-guerra-header {
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      border: 1px solid rgba(255, 209, 102, 0.3);
-    }
-
-    .snare-info h4 {
-      font-size: 0.95rem;
-      color: var(--gold-accent);
-      margin-bottom: 2px;
-    }
-
-    .snare-info p {
-      font-size: 0.78rem;
-      color: rgba(255, 255, 255, 0.75);
+      gap: 10px;
       margin-bottom: 8px;
     }
 
-    .roll-play-btn {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
+    .banda-guerra-header h3 {
+      font-size: 1.15rem;
+      color: var(--gold-accent);
+      letter-spacing: 1px;
+    }
+
+    .banda-guerra-desc {
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 16px;
+      line-height: 1.45;
+    }
+
+    .banda-buttons-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .banda-play-btn {
+      background: linear-gradient(135deg, #b45309, #d97706);
       color: #fff;
-      border: 0;
-      padding: 6px 14px;
-      border-radius: 16px;
-      font-size: 0.75rem;
+      border: 1px solid rgba(255, 209, 102, 0.6);
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-size: 0.88rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
-      transition: transform 0.2s;
+      gap: 7px;
+      box-shadow: 0 4px 15px rgba(180, 83, 9, 0.4);
+      transition: all 0.25s ease;
     }
 
-    .roll-play-btn:hover {
-      transform: scale(1.04);
+    .banda-play-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 25px rgba(217, 119, 6, 0.6);
     }
 
-    /* ========================================================
-       PASTEL CON TOPPER DE INGENIERA Y CAJERA
-       ======================================================== */
+    .banda-play-btn.ciudadela {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      border-color: #60a5fa;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+    }
+
+    .banda-play-btn.ciudadela:hover {
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
+    }
+
+    .banda-play-btn.snare-quick {
+      background: linear-gradient(135deg, #6b21a8, #9333ea);
+      border-color: #c084fc;
+      box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4);
+    }
+
+    .banda-status-text {
+      font-size: 0.76rem;
+      color: var(--bts-magenta);
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    /* PASTEL */
     .cake-stage {
       display: flex;
       flex-direction: column;
@@ -823,9 +839,7 @@
       margin-top: 4px;
     }
 
-    /* ========================================================
-       SECCIÓN DE PHOTOCARDS
-       ======================================================== */
+    /* PHOTOCARDS */
     .photocards-section {
       margin-bottom: 35px;
     }
@@ -1100,7 +1114,7 @@
   <canvas id="galaxyCanvas"></canvas>
   <div class="light-beams" id="lightBeams"></div>
 
-  <!-- PANTALLA 1: TICKET VIP YOSS (FUTURA ING & BANDA DE GUERRA) -->
+  <!-- PANTALLA 1: TICKET VIP YOSS -->
   <main class="wrapper">
     <section id="welcomeScreen" class="screen active">
       <div class="ticket-container">
@@ -1115,7 +1129,6 @@
             <span class="badge-festa">BTS SPECIAL FESTA · 2026</span>
           </div>
 
-          <!-- Badges de honor -->
           <div class="honors-tags">
             <span class="tag-honor eng">⚙️ FUTURA INGENIERA</span>
             <span class="tag-honor drum">🥁 CAJERA DE BANDA DE GUERRA</span>
@@ -1175,9 +1188,13 @@
         </div>
         
         <div class="top-controls">
-          <button id="drumSnareBtn" class="control-btn drum-btn" title="Tocar Redoble de Guerra Militar (ON Style)">
+          <button id="topDianaBtn" class="control-btn diana-btn" title="Toque: 3 de Diana (Felicitación Banda de Guerra)">
+            <span>🎺</span>
+            <span>3 de Diana</span>
+          </button>
+          <button id="topCiudadelaBtn" class="control-btn" title="Marcha: Ciudadela (Banda de Guerra)">
             <span>🥁</span>
-            <span>Redoble Militar</span>
+            <span>Ciudadela</span>
           </button>
           <button id="armyBombBtn" class="control-btn" title="Modo Concierto ARMY Bomb">
             <span class="bomb-icon">💣</span>
@@ -1211,16 +1228,31 @@
             <p id="typewriterText" class="letter-text"></p>
           </div>
 
-          <!-- WIDGET DE LA CAJA MILITAR INTERACTIVA -->
-          <div class="marching-snare-widget">
-            <div class="snare-icon-box">🥁</div>
-            <div class="snare-info">
-              <h4>La Caja de Guerra de Yoss</h4>
-              <p>Tu ritmo y disciplina marcan el paso de la grandeza. ¡Haz sonar el redoble marcial estilo <em>'ON'</em>!</p>
-              <button id="widgetSnareBtn" class="roll-play-btn">
-                <span>⚡</span> Tocar Redoble Marcial
+          <!-- PABELLÓN DE BANDA DE GUERRA: 3 DE DIANA & CIUDADELA -->
+          <div class="banda-guerra-box">
+            <div class="banda-guerra-header">
+              <span>🎺</span>
+              <h3>Pabellón de Banda de Guerra · Cajera Yoss</h3>
+              <span>🥁</span>
+            </div>
+            <p class="banda-guerra-desc">
+              Toques reglamentarios de honor interpretados con clarín militar y caja marcial con entorchado:
+            </p>
+            <div class="banda-buttons-row">
+              <button id="playDianaBtn" class="banda-play-btn" title="Tocar 3 de Diana">
+                <span>🎺🥁</span>
+                <span>Toque: 3 de Diana (¡Felicitación!)</span>
+              </button>
+              <button id="playCiudadelaBtn" class="banda-play-btn ciudadela" title="Tocar Marcha Ciudadela">
+                <span>🎖️🥁</span>
+                <span>Marcha: Ciudadela</span>
+              </button>
+              <button id="playSnareQuickBtn" class="banda-play-btn snare-quick" title="Redoble rápido de caja militar">
+                <span>⚡</span>
+                <span>Redoble de Fuego</span>
               </button>
             </div>
+            <p class="banda-status-text" id="bandaStatusText">¡Toca "3 de Diana" para rendir los honores de cumpleaños a Yoss!</p>
           </div>
 
           <!-- PASTEL DE CUMPLEAÑOS BTS INTERACTIVO -->
@@ -1326,7 +1358,7 @@
         realName: "Jung Hoseok",
         emoji: "🐿️",
         role: "Bailarín & Rapero",
-        quote: "“¡I'm your hope! ¡Ese redoble de cajera tiene toda la energía y fuerza de 'ON'! Con esa misma vibra y alegría vas a terminar tus residencias con los más altos honores. ¡A celebrar en grande!”"
+        quote: "“¡I'm your hope! ¡Ese redoble de cajera tiene toda la energía y fuerza marcial de 'ON'! Con esa misma vibra y alegría vas a terminar tus residencias con los más altos honores. ¡A celebrar en grande!”"
       },
       {
         name: "Jimin",
@@ -1511,7 +1543,9 @@
       grid.appendChild(el);
     });
 
-    // SINTETIZADOR DE AUDIO (WEB AUDIO API)
+    // ========================================================
+    // SINTETIZADOR AVANZADO: CORNETA MILITAR + CAJA MARCIAL
+    // ========================================================
     let audioCtx = null;
     let isMusicActive = false;
     let loopTimer = null;
@@ -1530,6 +1564,7 @@
       }
     }
 
+    // Nota musical dulce para la melodía de cumpleaños
     function playNote(freq, start, dur, vol = 0.16) {
       const actx = getAudioCtx();
       if (!actx) return;
@@ -1552,13 +1587,48 @@
       if (actx) playNote(freq, actx.currentTime, 0.4, 0.12);
     }
 
-    // SONIDO REALISTA DE CAJA DE GUERRA (SNARE DRUM) CON ENTORCHADO
-    function playSnareHit(time, volume = 0.25) {
+    // CLARÍN / CORNETA MILITAR (Timbre de latón brillante con armónicos de banda de guerra)
+    function playBugleNote(freq, time, dur, volume = 0.22) {
       const actx = getAudioCtx();
       if (!actx) return;
       try {
-        // Ruido blanco para el entorchado metálico de la caja
-        const bufferSize = actx.sampleRate * 0.15;
+        const osc = actx.createOscillator();
+        const filter = actx.createBiquadFilter();
+        const gain = actx.createGain();
+
+        // Onda sawtooth filtrada para simular el brillo del metal/latón
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(freq, time);
+
+        // Filtro pasa-banda con apertura inicial de ataque de trompeta militar
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(1400, time);
+        filter.frequency.exponentialRampToValueAtTime(1800, time + 0.04);
+        filter.frequency.exponentialRampToValueAtTime(1200, time + dur);
+        filter.Q.value = 3.0;
+
+        // Ataque de lengua de corneta militar (rápido y con cuerpo)
+        gain.gain.setValueAtTime(0.0001, time);
+        gain.gain.linearRampToValueAtTime(volume, time + 0.02);
+        gain.gain.setValueAtTime(volume * 0.95, time + dur - 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, time + dur);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(actx.destination);
+
+        osc.start(time);
+        osc.stop(time + dur);
+      } catch (e) {}
+    }
+
+    // CAJA DE GUERRA (SNARE DRUM) CON ENTORCHADO Y GOLPE SECO
+    function playSnareHit(time, volume = 0.24, isRimshot = false) {
+      const actx = getAudioCtx();
+      if (!actx) return;
+      try {
+        // 1. Entorchado metálico (Ruido blanco filtrado de alta frecuencia)
+        const bufferSize = actx.sampleRate * 0.12;
         const buffer = actx.createBuffer(1, bufferSize, actx.sampleRate);
         const data = buffer.getChannelData(0);
         for (let i = 0; i < bufferSize; i++) {
@@ -1570,61 +1640,205 @@
 
         const filter = actx.createBiquadFilter();
         filter.type = 'highpass';
-        filter.frequency.setValueAtTime(900, time);
+        filter.frequency.setValueAtTime(isRimshot ? 1200 : 900, time);
 
         const noiseGain = actx.createGain();
         noiseGain.gain.setValueAtTime(volume, time);
-        noiseGain.gain.exponentialRampToValueAtTime(0.001, time + 0.14);
+        noiseGain.gain.exponentialRampToValueAtTime(0.0001, time + (isRimshot ? 0.16 : 0.11));
 
         noise.connect(filter);
         filter.connect(noiseGain);
         noiseGain.connect(actx.destination);
 
-        // Tono grave del parche de la caja
+        // 2. Parche / Cuerpo de la caja militar
         const osc = actx.createOscillator();
         const oscGain = actx.createGain();
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(180, time);
-        osc.frequency.exponentialRampToValueAtTime(50, time + 0.08);
+        osc.frequency.setValueAtTime(isRimshot ? 240 : 180, time);
+        osc.frequency.exponentialRampToValueAtTime(45, time + 0.07);
 
-        oscGain.gain.setValueAtTime(volume * 0.9, time);
-        oscGain.gain.exponentialRampToValueAtTime(0.001, time + 0.08);
+        oscGain.gain.setValueAtTime(volume * 0.85, time);
+        oscGain.gain.exponentialRampToValueAtTime(0.0001, time + 0.07);
 
         osc.connect(oscGain);
         oscGain.connect(actx.destination);
 
         noise.start(time);
         osc.start(time);
-        osc.stop(time + 0.15);
+        osc.stop(time + 0.16);
       } catch (e) {}
     }
 
-    // SECUENCIA DE REDOBLE MILITAR (PARADIDDLE / MARCHING ROLL ESTILO BTS 'ON')
-    function triggerMilitaryDrumRoll() {
+    // ========================================================
+    // TOQUE REGLAMENTARIO: TRES DE DIANA (FELICITACIÓN)
+    // ========================================================
+    function playTresDeDiana() {
+      const actx = getAudioCtx();
+      if (!actx) return;
+
+      const statusEl = document.getElementById('bandaStatusText');
+      statusEl.textContent = '🎺🥁 Tocando: Tres de Diana en honor a Yoss... ¡Diana de felicitación!';
+      showToast('🎺 ¡Tres de Diana para la cumpleañera e ingeniera Yoss!');
+      spawnConfetti(260);
+
+      const now = actx.currentTime + 0.05;
+
+      // Armónicos naturales de corneta militar en Sib
+      const G4 = 392.00;
+      const C5 = 523.25;
+      const E5 = 659.25;
+      const G5 = 783.99;
+
+      let t = now;
+
+      // DIANA 1: "Ta-ta-ta-ta taaa..." + Redoble de caja
+      const diana1Notes = [
+        [G4, 0.14], [C5, 0.12], [C5, 0.12], [C5, 0.18], [E5, 0.35], [C5, 0.35]
+      ];
+      diana1Notes.forEach(([f, d]) => {
+        playBugleNote(f, t, d * 0.95, 0.25);
+        playSnareHit(t, 0.18);
+        t += d;
+      });
+
+      // Redoble de caja intermedio
+      for (let i = 0; i < 6; i++) {
+        playSnareHit(t, 0.15 + (i * 0.03));
+        t += 0.07;
+      }
+      playSnareHit(t, 0.38, true); // Golpe seco
+      t += 0.25;
+
+      // DIANA 2: Subida festiva de la corneta
+      const diana2Notes = [
+        [G4, 0.14], [C5, 0.12], [E5, 0.12], [G5, 0.32], [E5, 0.22], [C5, 0.38]
+      ];
+      diana2Notes.forEach(([f, d]) => {
+        playBugleNote(f, t, d * 0.95, 0.26);
+        playSnareHit(t, 0.20);
+        t += d;
+      });
+
+      // Redoble de caja intermedio 2
+      for (let i = 0; i < 7; i++) {
+        playSnareHit(t, 0.16 + (i * 0.03));
+        t += 0.065;
+      }
+      playSnareHit(t, 0.40, true);
+      t += 0.28;
+
+      // DIANA 3: Remate triunfal con toda la fuerza marcial
+      const diana3Notes = [
+        [C5, 0.14], [E5, 0.14], [G5, 0.42], [E5, 0.20], [C5, 0.20], [E5, 0.20], [C5, 0.45]
+      ];
+      diana3Notes.forEach(([f, d]) => {
+        playBugleNote(f, t, d * 0.95, 0.28);
+        playSnareHit(t, 0.22);
+        t += d;
+      });
+
+      // Remate final de banda de guerra (Diana completa: ¡Ta-ca-ta-ca-tán... TAN TAN!)
+      for (let i = 0; i < 10; i++) {
+        playSnareHit(t, 0.20 + (i * 0.025));
+        t += 0.055;
+      }
+      playSnareHit(t, 0.45, true); // Golpe fuerte
+      t += 0.18;
+      playSnareHit(t, 0.48, true); // Golpe final triunfal
+
+      setTimeout(() => {
+        statusEl.textContent = '✨ ¡Diana completada con honores para la Ingeniera Yoss!';
+        spawnConfetti(150);
+      }, (t - now) * 1000);
+    }
+
+    // ========================================================
+    // MARCHA REGLAMENTARIA: CIUDADELA
+    // ========================================================
+    function playMarchaCiudadela() {
+      const actx = getAudioCtx();
+      if (!actx) return;
+
+      const statusEl = document.getElementById('bandaStatusText');
+      statusEl.textContent = '🎖️🥁 Tocando: Marcha Ciudadela... ¡Paso marcial de cajeros!';
+      showToast('🎖️ ¡Marcha Ciudadela para la cajera de banda de guerra Yoss!');
+      spawnConfetti(200);
+
+      const now = actx.currentTime + 0.05;
+      const G4 = 392.00;
+      const C5 = 523.25;
+      const E5 = 659.25;
+      const D5 = 587.33;
+
+      let t = now;
+
+      // Introducción marcial de caja (Entrada clásica de Ciudadela)
+      // Planchado + redoble cerrado + dos golpes secos
+      playSnareHit(t, 0.35, true);
+      t += 0.18;
+      for (let i = 0; i < 8; i++) {
+        playSnareHit(t, 0.18 + i * 0.02);
+        t += 0.06;
+      }
+      playSnareHit(t, 0.38, true);
+      t += 0.2;
+      playSnareHit(t, 0.38, true);
+      t += 0.25;
+
+      // Frase 1 de Ciudadela (Corneta y compás de marcha)
+      const frase1 = [
+        [G4, 0.35], [C5, 0.18], [E5, 0.35], [C5, 0.35],
+        [G4, 0.18], [C5, 0.18], [E5, 0.24], [D5, 0.24], [C5, 0.45]
+      ];
+
+      frase1.forEach(([f, d]) => {
+        playBugleNote(f, t, d * 0.95, 0.26);
+        playSnareHit(t, 0.22);
+        // Contratiempo de marcha en la caja
+        playSnareHit(t + d * 0.5, 0.14);
+        t += d;
+      });
+
+      // Redoble de corte de marcha
+      for (let i = 0; i < 9; i++) {
+        playSnareHit(t, 0.18 + i * 0.025);
+        t += 0.055;
+      }
+      playSnareHit(t, 0.42, true);
+      t += 0.18;
+      playSnareHit(t, 0.45, true);
+
+      setTimeout(() => {
+        statusEl.textContent = '🥁 ¡Marcha Ciudadela ejecutada con marcialidad y orgullo!';
+      }, (t - now) * 1000);
+    }
+
+    // REDOBLE RÁPIDO DE CAJA (CRESCENDO)
+    function triggerQuickSnareRoll() {
       const actx = getAudioCtx();
       if (!actx) return;
       const now = actx.currentTime + 0.02;
 
-      // Redoble rápido in crescendo (16 golpes) + golpe acentuado final
       const hits = 18;
-      const spacing = 0.065;
+      const spacing = 0.062;
       for (let i = 0; i < hits; i++) {
         const t = now + i * spacing;
-        const vol = 0.10 + (i / hits) * 0.25;
+        const vol = 0.12 + (i / hits) * 0.28;
         playSnareHit(t, vol);
       }
-
-      // Golpe final acentuado (Flam / golpe seco)
       const finalT = now + hits * spacing + 0.08;
-      playSnareHit(finalT, 0.45);
+      playSnareHit(finalT, 0.48, true);
 
-      showToast('🥁 ¡Redoble de Caja Militar para la Cajera de Honor Yoss!');
-      spawnConfetti(180);
+      showToast('🥁 ¡Redoble marcial con las baquetas de Yoss!');
+      spawnConfetti(160);
     }
 
-    // BOTONES DE REDOBLE
-    document.getElementById('drumSnareBtn').addEventListener('click', triggerMilitaryDrumRoll);
-    document.getElementById('widgetSnareBtn').addEventListener('click', triggerMilitaryDrumRoll);
+    // VINCULACIÓN DE BOTONES DE BANDA DE GUERRA
+    document.getElementById('playDianaBtn').addEventListener('click', playTresDeDiana);
+    document.getElementById('topDianaBtn').addEventListener('click', playTresDeDiana);
+    document.getElementById('playCiudadelaBtn').addEventListener('click', playMarchaCiudadela);
+    document.getElementById('topCiudadelaBtn').addEventListener('click', playMarchaCiudadela);
+    document.getElementById('playSnareQuickBtn').addEventListener('click', triggerQuickSnareRoll);
 
     // MELODÍA BTS & CUMPLEAÑOS
     function playBirthdayMelody() {
