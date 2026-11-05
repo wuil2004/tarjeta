@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>💜 Happy Birthday Yoss! · BTS Festa</title>
+  <title>💜 Happy Birthday Yoss! · Futura Ingeniera & Cajera de Honor · BTS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
@@ -15,6 +15,7 @@
       --neon-glow: #c77dff;
       --bts-magenta: #e0aaff;
       --gold-accent: #ffd166;
+      --engineer-cyan: #38bdf8;
       --card-bg: rgba(25, 10, 45, 0.72);
       --glass-border: rgba(214, 163, 255, 0.35);
       --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -37,7 +38,6 @@
       position: relative;
     }
 
-    /* CANVAS DE GALAXIA MIKROKOSMOS */
     #galaxyCanvas {
       position: fixed;
       inset: 0;
@@ -47,7 +47,6 @@
       pointer-events: none;
     }
 
-    /* EFECTO HAZ DE LUZ ARMY BOMB */
     .light-beams {
       position: fixed;
       inset: 0;
@@ -83,7 +82,7 @@
     .screen {
       display: none;
       width: 100%;
-      max-width: 780px;
+      max-width: 800px;
       margin: 0 auto;
     }
 
@@ -98,7 +97,7 @@
     }
 
     /* ========================================================
-       PANTALLA 1: TICKET VIP BTS PARA YOSS
+       PANTALLA 1: TICKET VIP YOSS (FUTURA ING & BANDA DE GUERRA)
        ======================================================== */
     .ticket-container {
       perspective: 1200px;
@@ -109,22 +108,17 @@
 
     .ticket-card {
       width: 100%;
-      max-width: 440px;
-      background: linear-gradient(145deg, rgba(45, 12, 75, 0.92), rgba(18, 5, 35, 0.96));
+      max-width: 480px;
+      background: linear-gradient(145deg, rgba(45, 12, 75, 0.94), rgba(18, 5, 35, 0.98));
       border: 1px solid var(--glass-border);
-      border-radius: 24px;
+      border-radius: 26px;
       padding: 32px 24px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(157, 78, 221, 0.35);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 45px rgba(157, 78, 221, 0.4);
       backdrop-filter: blur(16px);
       text-align: center;
       position: relative;
       overflow: hidden;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .ticket-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85), 0 0 45px rgba(199, 125, 255, 0.5);
+      transition: transform 0.4s ease;
     }
 
     .ticket-card::before {
@@ -149,8 +143,8 @@
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px dashed rgba(224, 170, 255, 0.35);
-      padding-bottom: 18px;
-      margin-bottom: 24px;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
     }
 
     .bts-logo-svg {
@@ -160,14 +154,43 @@
     }
 
     .badge-festa {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       letter-spacing: 2px;
       color: var(--gold-accent);
-      background: rgba(255, 209, 102, 0.12);
+      background: rgba(255, 209, 102, 0.15);
       padding: 5px 12px;
       border-radius: 20px;
-      border: 1px solid rgba(255, 209, 102, 0.3);
+      border: 1px solid rgba(255, 209, 102, 0.35);
       font-weight: 700;
+    }
+
+    /* Badges de honor para Yoss */
+    .honors-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .tag-honor {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 12px;
+      letter-spacing: 1px;
+    }
+
+    .tag-honor.eng {
+      background: rgba(56, 189, 248, 0.18);
+      color: var(--engineer-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+
+    .tag-honor.drum {
+      background: rgba(255, 209, 102, 0.18);
+      color: var(--gold-accent);
+      border: 1px solid rgba(255, 209, 102, 0.4);
     }
 
     .ticket-subtitle {
@@ -175,15 +198,14 @@
       letter-spacing: 4px;
       color: var(--bts-magenta);
       font-weight: 600;
-      margin-bottom: 6px;
     }
 
     .ticket-name {
-      font-size: 3.8rem;
+      font-size: clamp(3rem, 10vw, 4.2rem);
       font-weight: 900;
       letter-spacing: 2px;
       line-height: 1;
-      margin-bottom: 14px;
+      margin: 8px 0 12px;
     }
 
     .glow-purple {
@@ -193,41 +215,90 @@
       filter: drop-shadow(0 0 16px rgba(199, 125, 255, 0.8));
     }
 
+    /* Barra de progreso de residencias */
+    .residency-progress-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 14px;
+      padding: 10px 14px;
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      margin-bottom: 6px;
+      color: #e0f2fe;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 9px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      width: 98%;
+      height: 100%;
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc);
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
+      animation: pulseGlow 2s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      from { filter: brightness(1); }
+      to { filter: brightness(1.3); }
+    }
+
+    .progress-note {
+      font-size: 0.7rem;
+      color: var(--bts-magenta);
+      margin-top: 5px;
+      text-align: center;
+      font-style: italic;
+    }
+
     .ticket-msg {
-      font-size: 0.98rem;
-      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.88);
       line-height: 1.5;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .ticket-details {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      background: rgba(0, 0, 0, 0.32);
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.28);
       border-radius: 14px;
-      padding: 14px;
-      margin-bottom: 26px;
+      padding: 12px;
+      margin-bottom: 22px;
       text-align: left;
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .ticket-details span {
       display: block;
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       letter-spacing: 1.5px;
       color: rgba(224, 170, 255, 0.7);
       margin-bottom: 2px;
     }
 
     .ticket-details strong {
-      font-size: 0.92rem;
+      font-size: 0.85rem;
       color: #fff;
     }
 
     .ticket-stub {
       border-top: 1px dashed rgba(224, 170, 255, 0.35);
-      padding-top: 22px;
+      padding-top: 20px;
     }
 
     .glow-btn {
@@ -251,10 +322,6 @@
     .glow-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 14px 40px rgba(199, 125, 255, 0.85);
-    }
-
-    .glow-btn:active {
-      transform: scale(0.98);
     }
 
     .btn-icon {
@@ -309,7 +376,8 @@
     .top-controls {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .control-btn {
@@ -335,6 +403,18 @@
     .control-btn.active {
       background: linear-gradient(135deg, #7b2cbf, #c77dff);
       box-shadow: 0 0 20px rgba(199, 125, 255, 0.8);
+    }
+
+    /* Botón especial de redoble de caja */
+    .control-btn.drum-btn {
+      background: linear-gradient(135deg, rgba(255, 209, 102, 0.25), rgba(157, 78, 221, 0.35));
+      border-color: var(--gold-accent);
+      color: #fff;
+    }
+
+    .control-btn.drum-btn:hover {
+      background: linear-gradient(135deg, rgba(255, 209, 102, 0.45), rgba(157, 78, 221, 0.6));
+      transform: scale(1.05);
     }
 
     .sound-wave {
@@ -386,7 +466,7 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 3px;
-      background: linear-gradient(90deg, transparent, #c77dff, #ffd166, #c77dff, transparent);
+      background: linear-gradient(90deg, transparent, #38bdf8, #ffd166, #c77dff, transparent);
     }
 
     .anniversary-tag {
@@ -394,7 +474,7 @@
       font-size: 0.78rem;
       letter-spacing: 3px;
       color: var(--gold-accent);
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       font-weight: 700;
     }
 
@@ -402,47 +482,148 @@
       display: flex;
       flex-direction: column;
       gap: 2px;
-      margin-bottom: 18px;
+      margin-bottom: 12px;
     }
 
     .sub-greeting {
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: var(--bts-magenta);
     }
 
     .name-highlight {
-      font-size: clamp(3rem, 11vw, 4.8rem);
+      font-size: clamp(2.8rem, 10vw, 4.6rem);
       font-weight: 900;
       letter-spacing: 3px;
-      background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 30%, #e0aaff 60%, #c77dff 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 30%, #e0aaff 60%, #c77dff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       filter: drop-shadow(0 0 25px rgba(199, 125, 255, 0.85));
     }
 
+    .role-honor-pills {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .honor-pill {
+      font-size: 0.78rem;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .honor-pill.eng {
+      background: rgba(56, 189, 248, 0.15);
+      color: #7dd3fc;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+
+    .honor-pill.band {
+      background: rgba(255, 209, 102, 0.15);
+      color: #fde047;
+      border: 1px solid rgba(255, 209, 102, 0.4);
+    }
+
     .typewriter-box {
-      min-height: 80px;
+      min-height: 95px;
       margin: 10px auto 26px;
-      max-width: 600px;
+      max-width: 640px;
     }
 
     .letter-text {
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       line-height: 1.65;
-      color: rgba(255, 255, 255, 0.92);
+      color: rgba(255, 255, 255, 0.94);
       font-weight: 400;
     }
 
+    /* WIDGET INTERACTIVO DE CAJA MILITAR / MARCHING DRUM */
+    .marching-snare-widget {
+      background: rgba(20, 6, 38, 0.65);
+      border: 1px dashed rgba(255, 209, 102, 0.4);
+      border-radius: 18px;
+      padding: 16px;
+      margin: 0 auto 26px;
+      max-width: 440px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .snare-icon-box {
+      font-size: 2.4rem;
+      background: rgba(255, 209, 102, 0.12);
+      border-radius: 14px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 209, 102, 0.3);
+    }
+
+    .snare-info h4 {
+      font-size: 0.95rem;
+      color: var(--gold-accent);
+      margin-bottom: 2px;
+    }
+
+    .snare-info p {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 8px;
+    }
+
+    .roll-play-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      border: 0;
+      padding: 6px 14px;
+      border-radius: 16px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+      transition: transform 0.2s;
+    }
+
+    .roll-play-btn:hover {
+      transform: scale(1.04);
+    }
+
     /* ========================================================
-       PASTEL DE CUMPLEAÑOS INTERACTIVO
+       PASTEL CON TOPPER DE INGENIERA Y CAJERA
        ======================================================== */
     .cake-stage {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 15px;
+      margin-top: 10px;
+    }
+
+    .cake-topper-badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gold-accent);
+      background: rgba(255, 209, 102, 0.15);
+      border: 1px solid rgba(255, 209, 102, 0.4);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .cake {
@@ -668,13 +849,13 @@
 
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
     }
 
     .photocard {
       perspective: 1000px;
-      height: 290px;
+      height: 310px;
       cursor: pointer;
     }
 
@@ -732,7 +913,7 @@
       color: var(--gold-accent);
       font-weight: 700;
       text-transform: uppercase;
-      margin-top: 8px;
+      margin-top: 6px;
     }
 
     .member-name {
@@ -757,29 +938,29 @@
       transform: rotateY(180deg);
       justify-content: center;
       text-align: center;
-      padding: 22px 18px;
+      padding: 20px 16px;
     }
 
     .back-header {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       letter-spacing: 2px;
       color: var(--gold-accent);
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .member-message-text {
-      font-size: 0.92rem;
-      line-height: 1.55;
+      font-size: 0.88rem;
+      line-height: 1.52;
       color: #ffffff;
       font-style: italic;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .member-sign {
       font-weight: 800;
       color: var(--bts-magenta);
-      font-size: 0.95rem;
+      font-size: 0.92rem;
     }
 
     /* FOOTER */
@@ -847,7 +1028,7 @@
       border: 1px solid var(--bts-magenta);
       border-radius: 24px;
       padding: 32px 24px;
-      max-width: 420px;
+      max-width: 440px;
       width: 100%;
       text-align: center;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(199, 125, 255, 0.5);
@@ -859,7 +1040,7 @@
     }
 
     .modal-box h3 {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       margin-bottom: 10px;
       color: #fff;
     }
@@ -919,14 +1100,14 @@
   <canvas id="galaxyCanvas"></canvas>
   <div class="light-beams" id="lightBeams"></div>
 
-  <!-- PANTALLA 1: TICKET VIP FESTA EXCLUSIVO PARA YOSS -->
+  <!-- PANTALLA 1: TICKET VIP YOSS (FUTURA ING & BANDA DE GUERRA) -->
   <main class="wrapper">
     <section id="welcomeScreen" class="screen active">
       <div class="ticket-container">
         <div class="ticket-card">
           <div class="ticket-header">
             <div class="bts-logo-svg">
-              <svg viewBox="0 0 100 120" class="logo-bts" style="width:100%;height:100%;">
+              <svg viewBox="0 0 100 120" style="width:100%;height:100%;">
                 <path d="M12 10 L44 20 L44 100 L12 90 Z" fill="currentColor"/>
                 <path d="M88 10 L56 20 L56 100 L88 90 Z" fill="currentColor"/>
               </svg>
@@ -934,13 +1115,34 @@
             <span class="badge-festa">BTS SPECIAL FESTA · 2026</span>
           </div>
 
+          <!-- Badges de honor -->
+          <div class="honors-tags">
+            <span class="tag-honor eng">⚙️ FUTURA INGENIERA</span>
+            <span class="tag-honor drum">🥁 CAJERA DE BANDA DE GUERRA</span>
+          </div>
+
           <div class="ticket-body">
             <p class="ticket-subtitle">PASE VIP EXCLUSIVO PARA</p>
             <h1 class="ticket-name glow-purple">YOSS</h1>
-            <p class="ticket-msg">Los 7 chicos tienen una sorpresa preparada especialmente para ti hoy.</p>
+
+            <!-- Barra de Residencias -->
+            <div class="residency-progress-box">
+              <div class="progress-header">
+                <span>ESTADO: RESIDENCIAS PROFESIONALES</span>
+                <strong>98% COMPLETADO 🚀</strong>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-fill"></div>
+              </div>
+              <p class="progress-note">¡Casi ingeniera! El esfuerzo y los desvelos darán su fruto.</p>
+            </div>
+
+            <p class="ticket-msg">
+              Por tu disciplina marcando el paso con las baquetas y tu grandeza resolviendo retos en ingeniería: los 7 chicos tienen una sorpresa para ti.
+            </p>
             
             <div class="ticket-details">
-              <div><span>INVITADA DE HONOR</span><strong>Yoss 💜</strong></div>
+              <div><span>INVITADA DE HONOR</span><strong>Ing. Yoss 💜</strong></div>
               <div><span>ACCESO</span><strong>Backstage & Corazón BTS</strong></div>
             </div>
           </div>
@@ -973,6 +1175,10 @@
         </div>
         
         <div class="top-controls">
+          <button id="drumSnareBtn" class="control-btn drum-btn" title="Tocar Redoble de Guerra Militar (ON Style)">
+            <span>🥁</span>
+            <span>Redoble Militar</span>
+          </button>
           <button id="armyBombBtn" class="control-btn" title="Modo Concierto ARMY Bomb">
             <span class="bomb-icon">💣</span>
             <span class="btn-text">ARMY Bomb</span>
@@ -993,15 +1199,36 @@
           <span class="anniversary-tag">✨ HAPPY BIRTHDAY TO OUR STAR ✨</span>
           <h1 class="main-title">
             <span class="sub-greeting">¡Feliz Cumpleaños,</span>
-            <span class="name-highlight">YOSS!</span>
+            <span class="name-highlight">ING. YOSS!</span>
           </h1>
+
+          <div class="role-honor-pills">
+            <span class="honor-pill eng">📐 Próximamente Ingeniera (En Residencias)</span>
+            <span class="honor-pill band">🥁 Cajera de Banda de Guerra</span>
+          </div>
 
           <div class="typewriter-box">
             <p id="typewriterText" class="letter-text"></p>
           </div>
 
+          <!-- WIDGET DE LA CAJA MILITAR INTERACTIVA -->
+          <div class="marching-snare-widget">
+            <div class="snare-icon-box">🥁</div>
+            <div class="snare-info">
+              <h4>La Caja de Guerra de Yoss</h4>
+              <p>Tu ritmo y disciplina marcan el paso de la grandeza. ¡Haz sonar el redoble marcial estilo <em>'ON'</em>!</p>
+              <button id="widgetSnareBtn" class="roll-play-btn">
+                <span>⚡</span> Tocar Redoble Marcial
+              </button>
+            </div>
+          </div>
+
           <!-- PASTEL DE CUMPLEAÑOS BTS INTERACTIVO -->
           <div class="cake-stage">
+            <div class="cake-topper-badge">
+              <span>👷‍♀️</span> <span>¡Éxito en tus Residencias & Feliz Cumpleaños!</span> <span>🥁</span>
+            </div>
+
             <div class="cake" id="interactiveCake">
               <div class="candles-row">
                 <div class="candle c1"><div class="wick"></div><div class="flame"></div><div class="smoke"></div></div>
@@ -1013,7 +1240,7 @@
                 <span class="cake-initial">Y</span>
               </div>
               <div class="cake-tier mid">
-                <div class="ribbon">💜 BORAHAE 💜</div>
+                <div class="ribbon">💜 BORAHAE ING. YOSS 💜</div>
               </div>
               <div class="cake-tier base">
                 <div class="stars-deco">★ ★ ★ ★ ★</div>
@@ -1029,7 +1256,7 @@
                 <span>🎉</span> <span>Lluvia Púrpura</span>
               </button>
             </div>
-            <p class="cake-status" id="cakeStatus">¡Haz clic en soplar para pedir tu deseo de cumpleaños, Yoss!</p>
+            <p class="cake-status" id="cakeStatus">¡Haz clic en soplar para pedir tu deseo de cumpleaños y título profesional, Yoss!</p>
           </div>
         </div>
       </div>
@@ -1038,7 +1265,7 @@
       <section class="photocards-section">
         <div class="section-heading">
           <h2>Mensajes Exclusivos de los Chicos</h2>
-          <p>Toca cada photocard para voltearla y leer lo que cada integrante le escribió a <strong>Yoss</strong>:</p>
+          <p>Toca cada photocard para voltearla y leer lo que cada integrante le escribió a <strong>Yoss</strong> sobre su carrera y su pasión:</p>
         </div>
 
         <div class="cards-grid" id="photocardsGrid"></div>
@@ -1051,7 +1278,7 @@
           <span>"En la noche más profunda, las estrellas brillan con mayor intensidad."</span>
         </blockquote>
         <p class="borahae-message">
-          <strong>Yoss</strong>, gracias por iluminar el universo ARMY. ¡Te amamos hasta el morado! 💜
+          <strong>Ing. Yoss</strong>, gracias por marcar el compás en la banda de guerra y en la vida con tanta pasión y perseverancia. ¡Te amamos hasta el morado! 💜
         </p>
         <div class="footer-bts-sig">BTS (방탄소년단) 💜 RM · JIN · SUGA · J-HOPE · JIMIN · V · JUNGKOOK</div>
       </footer>
@@ -1061,9 +1288,9 @@
   <!-- MODAL / TOAST DE MENSAJES -->
   <div id="wishModal" class="modal">
     <div class="modal-box">
-      <div class="modal-sparkles">✨💜✨</div>
-      <h3 id="modalTitle">¡Deseo enviado al universo!</h3>
-      <p id="modalBody">Que cada día de este nuevo año te acerque a tus mayores anhelos, Yoss.</p>
+      <div class="modal-sparkles">✨📐🥁✨</div>
+      <h3 id="modalTitle">¡Deseo de Cumpleaños & Título Enviado!</h3>
+      <p id="modalBody">Que este nuevo año selle la culminación exitosa de tus residencias profesionales y te abra todas las puertas del éxito, futura Ingeniera Yoss.</p>
       <button id="closeModalBtn" class="modal-btn">Borahae 💜</button>
     </div>
   </div>
@@ -1071,62 +1298,62 @@
   <div id="toastNotification" class="toast"></div>
 
   <script>
-    // DATOS DE LOS MIEMBROS PARA YOSS
+    // DATOS DE LOS MIEMBROS ADAPTADOS A YOSS (INGENIERÍA & BANDA DE GUERRA)
     const membersData = [
       {
         name: "RM",
         realName: "Kim Namjoon",
         emoji: "🐨",
         role: "Líder & Rapero",
-        quote: "“Yoss, eres una estrella brillante en nuestra galaxia. Recuerda siempre amarte a ti misma y que eres el arte de tu propia vida. ¡Feliz cumpleaños!”"
+        quote: "“Yoss, resolver problemas complejos, hacer cálculos y resistir las residencias profesionales demuestra tu grandeza intelectual. Eres una ingeniera brillante y el arte de tu propia vida. ¡Feliz cumpleaños!”"
       },
       {
         name: "Jin",
         realName: "Kim Seokjin",
         emoji: "🐹",
         role: "Vocalista & Visual",
-        quote: "“¡Worldwide Handsome te desea el día más radiante, Yoss! Que la vida te regale tanta felicidad como tú regalas con tu sola sonrisa. ¡Y a comer mucho pastel!”"
+        quote: "“¡Worldwide Handsome reconoce a la ingeniera más genial! Esos desvelos en tus residencias valdrán cada gota de gloria cuando tengas tu título. ¡Hoy te toca descansar, comer mucho pastel y sonreír!”"
       },
       {
         name: "SUGA",
         realName: "Min Yoongi",
         emoji: "🐱",
         role: "Rapero & Productor",
-        quote: "“Yoss, que la música, la calma y el éxito te acompañen en cada proyecto de este nuevo año. Tómate hoy un respiro y disfruta tu momento.”"
+        quote: "“Tocar la caja en la banda de guerra requiere oído, precisión milimétrica y carácter firme. Igual que la ingeniería y la producción musical. Mis respetos para tu disciplina con las baquetas y tus proyectos, Yoss.”"
       },
       {
         name: "j-hope",
         realName: "Jung Hoseok",
         emoji: "🐿️",
         role: "Bailarín & Rapero",
-        quote: "“¡I'm your hope, you're my hope! Yoss, eres una persona llena de luz y energía positiva. ¡Hoy es tu día para brillar al máximo y bailar!”"
+        quote: "“¡I'm your hope! ¡Ese redoble de cajera tiene toda la energía y fuerza de 'ON'! Con esa misma vibra y alegría vas a terminar tus residencias con los más altos honores. ¡A celebrar en grande!”"
       },
       {
         name: "Jimin",
         realName: "Park Jimin",
         emoji: "🐥",
         role: "Vocalista & Bailarín",
-        quote: "“Querida Yoss, que este nuevo año de vida sea tan dulce y mágico como un momento de Serendipity. ¡Te envío un abrazo muy cálido y morado!”"
+        quote: "“Querida Yoss, sé lo mucho que te has esforzado en tus prácticas y residencias. Que este día sea un respiro cálido y lleno de dulzura como Serendipity. ¡Te envío un abrazo muy fuerte y morado!”"
       },
       {
         name: "V",
         realName: "Kim Taehyung",
         emoji: "🐯",
         role: "Vocalista & Visual",
-        quote: "“Yoss, en este universo de millones de luces, tu existencia tiene un brillo único y precioso. Borahae con todo mi corazón hoy y siempre.”"
+        quote: "“Yoss, entre cálculos de ingeniería, el redoble de tus baquetas y este universo de estrellas, tienes un brillo irrepetible. Que nunca te falte música en el alma. Borahae con todo mi corazón.”"
       },
       {
         name: "Jung Kook",
         realName: "Jeon Jungkook",
         emoji: "🐰",
         role: "Vocalista & Maknae",
-        quote: "“¡Feliz cumpleaños, Yoss! Eres nuestra Golden ARMY. Nunca dejes de perseguir tus sueños con la pasión que tienes. ¡A celebrar en grande!”"
+        quote: "“El compás marcial que marcas en la caja militar y tu tenacidad en tus residencias demuestran que eres una verdadera Golden Girl. ¡Nada te detiene, Ingeniera Yoss! ¡Feliz cumpleaños!”"
       }
     ];
 
-    const birthdayLetter = "Hoy celebramos la existencia de alguien muy especial: ¡tú, Yoss! Los 7 chicos de BTS y todo el universo ARMY se unen para desearte 365 nuevos días llenos de salud, proyectos cumplidos, risas y amor infinito. Gracias por brillar con tanta fuerza en nuestra galaxia. ¡Borahae, Yoss! 💜✨";
+    const birthdayLetter = "Hoy celebramos a una mujer imparable: ¡nuestra futura ingeniera y talentosa cajera de banda de guerra, Yoss! Entre planos, cálculos, el esfuerzo de tus residencias profesionales y la disciplina del redoble marcial, eres una inspiración para todo el universo ARMY y BTS. ¡Que este nuevo año selle tu título y todos tus más grandes sueños! Borahae! 💜✨";
 
-    // MOTOR CANVAS (MIKROKOSMOS & CONFETI)
+    // CANVAS DE GALAXIA MIKROKOSMOS & CONFETI
     const canvas = document.getElementById('galaxyCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -1151,7 +1378,7 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    const colors = ['#e0aaff', '#c77dff', '#9d4edd', '#7b2cbf', '#ffd166', '#ffffff', '#f472b6'];
+    const colors = ['#e0aaff', '#c77dff', '#9d4edd', '#38bdf8', '#ffd166', '#ffffff', '#f472b6'];
 
     function spawnConfetti(count = 120, x, y) {
       const ox = x ?? canvas.width / 2;
@@ -1168,7 +1395,7 @@
           rot: Math.random() * Math.PI * 2,
           vRot: (Math.random() - 0.5) * 0.2,
           life: 260,
-          isHeart: Math.random() < 0.4
+          isHeart: Math.random() < 0.35
         });
       }
     }
@@ -1232,7 +1459,6 @@
       requestAnimationFrame(loop);
     })();
 
-    // TOQUES Y CLICS EN PANTALLA
     window.addEventListener('click', (e) => {
       if (e.target.closest('button')) return;
       spawnConfetti(15, e.clientX, e.clientY);
@@ -1251,7 +1477,7 @@
         } else {
           clearInterval(typeTimer);
         }
-      }, 30);
+      }, 28);
     }
 
     // CARGAR PHOTOCARDS
@@ -1285,7 +1511,7 @@
       grid.appendChild(el);
     });
 
-    // SINTETIZADOR DE AUDIO
+    // SINTETIZADOR DE AUDIO (WEB AUDIO API)
     let audioCtx = null;
     let isMusicActive = false;
     let loopTimer = null;
@@ -1326,6 +1552,81 @@
       if (actx) playNote(freq, actx.currentTime, 0.4, 0.12);
     }
 
+    // SONIDO REALISTA DE CAJA DE GUERRA (SNARE DRUM) CON ENTORCHADO
+    function playSnareHit(time, volume = 0.25) {
+      const actx = getAudioCtx();
+      if (!actx) return;
+      try {
+        // Ruido blanco para el entorchado metálico de la caja
+        const bufferSize = actx.sampleRate * 0.15;
+        const buffer = actx.createBuffer(1, bufferSize, actx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = Math.random() * 2 - 1;
+        }
+
+        const noise = actx.createBufferSource();
+        noise.buffer = buffer;
+
+        const filter = actx.createBiquadFilter();
+        filter.type = 'highpass';
+        filter.frequency.setValueAtTime(900, time);
+
+        const noiseGain = actx.createGain();
+        noiseGain.gain.setValueAtTime(volume, time);
+        noiseGain.gain.exponentialRampToValueAtTime(0.001, time + 0.14);
+
+        noise.connect(filter);
+        filter.connect(noiseGain);
+        noiseGain.connect(actx.destination);
+
+        // Tono grave del parche de la caja
+        const osc = actx.createOscillator();
+        const oscGain = actx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(180, time);
+        osc.frequency.exponentialRampToValueAtTime(50, time + 0.08);
+
+        oscGain.gain.setValueAtTime(volume * 0.9, time);
+        oscGain.gain.exponentialRampToValueAtTime(0.001, time + 0.08);
+
+        osc.connect(oscGain);
+        oscGain.connect(actx.destination);
+
+        noise.start(time);
+        osc.start(time);
+        osc.stop(time + 0.15);
+      } catch (e) {}
+    }
+
+    // SECUENCIA DE REDOBLE MILITAR (PARADIDDLE / MARCHING ROLL ESTILO BTS 'ON')
+    function triggerMilitaryDrumRoll() {
+      const actx = getAudioCtx();
+      if (!actx) return;
+      const now = actx.currentTime + 0.02;
+
+      // Redoble rápido in crescendo (16 golpes) + golpe acentuado final
+      const hits = 18;
+      const spacing = 0.065;
+      for (let i = 0; i < hits; i++) {
+        const t = now + i * spacing;
+        const vol = 0.10 + (i / hits) * 0.25;
+        playSnareHit(t, vol);
+      }
+
+      // Golpe final acentuado (Flam / golpe seco)
+      const finalT = now + hits * spacing + 0.08;
+      playSnareHit(finalT, 0.45);
+
+      showToast('🥁 ¡Redoble de Caja Militar para la Cajera de Honor Yoss!');
+      spawnConfetti(180);
+    }
+
+    // BOTONES DE REDOBLE
+    document.getElementById('drumSnareBtn').addEventListener('click', triggerMilitaryDrumRoll);
+    document.getElementById('widgetSnareBtn').addEventListener('click', triggerMilitaryDrumRoll);
+
+    // MELODÍA BTS & CUMPLEAÑOS
     function playBirthdayMelody() {
       if (!isMusicActive) return;
       const actx = getAudioCtx();
@@ -1367,7 +1668,7 @@
       if (isMusicActive) {
         musicBtn.classList.add('playing-music');
         musicLabel.textContent = 'Música: ON';
-        showToast('🎵 Reproduciendo melodía para Yoss');
+        showToast('🎵 Melodía para Ing. Yoss');
         playBirthdayMelody();
       } else {
         musicBtn.classList.remove('playing-music');
@@ -1391,7 +1692,7 @@
       if (blown) {
         cake.classList.add('extinguished');
         blowText.textContent = 'Encender Velas de Nuevo';
-        cakeStatus.textContent = '¡Pide tu más grande deseo para este año, Yoss! ✨';
+        cakeStatus.textContent = '¡Pide tu deseo para este año y tu graduación, Yoss! ✨';
         spawnConfetti(260);
         playChime(880);
         setTimeout(() => wishModal.classList.add('active'), 650);
@@ -1410,7 +1711,7 @@
 
     document.getElementById('fireConfettiBtn').addEventListener('click', (e) => {
       spawnConfetti(220, e.clientX, e.clientY);
-      showToast('💜 ¡Lluvia de amor para Yoss!');
+      showToast('💜 ¡Lluvia de amor para la futura Ingeniera Yoss!');
       playChime(780);
     });
 
@@ -1448,7 +1749,7 @@
 
       spawnConfetti(220);
       startTypewriter(birthdayLetter);
-      showToast('🎉 ¡Bienvenida a tu BTS Festa, Yoss!');
+      showToast('🎉 ¡Bienvenida a tu BTS Festa, Ing. Yoss!');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
