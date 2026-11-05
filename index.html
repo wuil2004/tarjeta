@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>💜 Happy Birthday Yoss! · BTS Festa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Fondo de Galaxia / Mikrokosmos Interactivo -->
+  <canvas id="galaxyCanvas"></canvas>
+  <div class="light-beams" id="lightBeams"></div>
+
+  <!-- PANTALLA 1: TICKET VIP FESTA EXCLUSIVO PARA YOSS -->
+  <main class="wrapper">
+    <section id="welcomeScreen" class="screen active">
+      <div class="ticket-container">
+        <div class="ticket-card">
+          <div class="ticket-header">
+            <div class="bts-logo-svg">
+              <svg viewBox="0 0 100 120" class="logo-bts">
+                <path d="M12 10 L44 20 L44 100 L12 90 Z" fill="currentColor"/>
+                <path d="M88 10 L56 20 L56 100 L88 90 Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <span class="badge-festa">BTS SPECIAL FESTA · 2026</span>
+          </div>
+
+          <div class="ticket-body">
+            <p class="ticket-subtitle">PASE VIP EXCLUSIVO PARA</p>
+            <h1 class="ticket-name glow-purple">YOSS</h1>
+            <p class="ticket-msg">Los 7 chicos tienen una sorpresa preparada especialmente para ti hoy.</p>
+            
+            <div class="ticket-details">
+              <div><span>INVITADA DE HONOR</span><strong>Yoss 💜</strong></div>
+              <div><span>ACCESO</span><strong>Backstage & Corazón BTS</strong></div>
+            </div>
+          </div>
+
+          <div class="ticket-stub">
+            <button id="openTicketBtn" class="glow-btn">
+              <span class="btn-icon">💜</span>
+              <span>Abrir Invitación de BTS</span>
+            </button>
+            <p class="ticket-hint">Toca para encender la magia</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 2: TARJETA PRINCIPAL Y EXPERIENCIA FESTA -->
+    <section id="cardScreen" class="screen">
+      <!-- BARRA SUPERIOR BTS -->
+      <header class="card-header">
+        <div class="bts-banner">
+          <svg viewBox="0 0 100 120" class="logo-bts mini">
+            <path d="M12 10 L44 20 L44 100 L12 90 Z" fill="currentColor"/>
+            <path d="M88 10 L56 20 L56 100 L88 90 Z" fill="currentColor"/>
+          </svg>
+          <span>방탄소년단 · FESTA FOR YOSS</span>
+          <svg viewBox="0 0 100 120" class="logo-army mini">
+            <path d="M12 25 L44 12 L44 95 L12 108 Z" fill="currentColor"/>
+            <path d="M88 25 L56 12 L56 95 L88 108 Z" fill="currentColor"/>
+          </svg>
+        </div>
+        
+        <!-- Controles rápidos: Audio y ARMY Bomb -->
+        <div class="top-controls">
+          <button id="armyBombBtn" class="control-btn" title="Modo Concierto ARMY Bomb">
+            <span class="bomb-icon">💣</span>
+            <span class="btn-text">ARMY Bomb</span>
+          </button>
+          <button id="musicToggleBtn" class="control-btn playing-music" title="Música Mikrokosmos / Happy Birthday">
+            <span class="music-icon">🎵</span>
+            <span class="btn-text" id="musicLabel">Música: ON</span>
+            <div class="sound-wave">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </button>
+        </div>
+      </header>
+
+      <!-- TARJETA CENTRAL HERO -->
+      <div class="hero-card">
+        <div class="hologram-effect"></div>
+        <div class="hero-content">
+          <span class="anniversary-tag">✨ HAPPY BIRTHDAY TO OUR STAR ✨</span>
+          <h1 class="main-title">
+            <span class="sub-greeting">¡Feliz Cumpleaños,</span>
+            <span class="name-highlight">YOSS!</span>
+          </h1>
+
+          <div class="typewriter-box">
+            <p id="typewriterText" class="letter-text"></p>
+          </div>
+
+          <!-- PASTEL DE CUMPLEAÑOS BTS INTERACTIVO -->
+          <div class="cake-stage">
+            <div class="cake" id="interactiveCake">
+              <!-- Velas mágicas -->
+              <div class="candles-row">
+                <div class="candle c1"><div class="wick"></div><div class="flame"></div><div class="smoke"></div></div>
+                <div class="candle c2"><div class="wick"></div><div class="flame"></div><div class="smoke"></div></div>
+                <div class="candle c3"><div class="wick"></div><div class="flame"></div><div class="smoke"></div></div>
+                <div class="candle c4"><div class="wick"></div><div class="flame"></div><div class="smoke"></div></div>
+              </div>
+              <div class="cake-tier top">
+                <div class="frosting"></div>
+                <span class="cake-initial">Y</span>
+              </div>
+              <div class="cake-tier mid">
+                <div class="ribbon">💜 BORAHAE 💜</div>
+              </div>
+              <div class="cake-tier base">
+                <div class="stars-deco">★ ★ ★ ★ ★</div>
+              </div>
+              <div class="cake-plate"></div>
+            </div>
+
+            <div class="cake-controls">
+              <button id="blowCandlesBtn" class="cake-btn">
+                <span>🎂</span> <span id="blowText">Soplar las Velitas</span>
+              </button>
+              <button id="fireConfettiBtn" class="cake-btn secondary">
+                <span>🎉</span> <span>Lluvia Púrpura</span>
+              </button>
+            </div>
+            <p class="cake-status" id="cakeStatus">¡Haz clic en soplar para pedir tu deseo de cumpleaños, Yoss!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN PHOTOCARDS INTERACTIVAS DE LOS 7 MIEMBROS -->
+      <section class="photocards-section">
+        <div class="section-heading">
+          <h2>Mensajes Exclusivos de los Chicos</h2>
+          <p>Toca cada photocard holográfica para voltearla y leer lo que cada integrante le escribió a <strong>Yoss</strong>:</p>
+        </div>
+
+        <div class="cards-grid" id="photocardsGrid">
+          <!-- Generado dinámicamente con JS -->
+        </div>
+      </section>
+
+      <!-- CITA DE BTS FINAL -->
+      <footer class="card-footer">
+        <blockquote class="korean-quote">
+          "가장 깊은 밤에 더 빛나는 별빛"
+          <span>"En la noche más profunda, las estrellas brillan con mayor intensidad."</span>
+        </blockquote>
+        <p class="borahae-message">
+          <strong>Yoss</strong>, gracias por iluminar el universo ARMY. ¡Te amamos hasta el morado! 💜
+        </p>
+        <div class="footer-bts-sig">BTS (방탄소년단) 💜 RM · JIN · SUGA · J-HOPE · JIMIN · V · JUNGKOOK</div>
+      </footer>
+    </section>
+  </main>
+
+  <!-- MODAL / TOAST DE MENSAJES -->
+  <div id="wishModal" class="modal">
+    <div class="modal-box">
+      <div class="modal-sparkles">✨💜✨</div>
+      <h3 id="modalTitle">¡Deseo enviado al universo!</h3>
+      <p id="modalBody">Que cada día de este nuevo año te acerque a tus mayores anhelos, Yoss.</p>
+      <button id="closeModalBtn" class="modal-btn">Borahae 💜</button>
+    </div>
+  </div>
+
+  <div id="toastNotification" class="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

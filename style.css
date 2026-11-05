@@ -1,0 +1,950 @@
+:root {
+  --primary-purple: #9d4edd;
+  --dark-purple: #0f051d;
+  --deep-violet: #240046;
+  --neon-glow: #c77dff;
+  --bts-magenta: #e0aaff;
+  --gold-accent: #ffd166;
+  --card-bg: rgba(25, 10, 45, 0.72);
+  --glass-border: rgba(214, 163, 255, 0.35);
+  --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-main);
+  color: #fff;
+  background-color: var(--dark-purple);
+  overflow-x: hidden;
+  position: relative;
+  user-select: none;
+}
+
+/* CANVAS DE GALAXIA INTERACTIVA (MIKROKOSMOS) */
+#galaxyCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* EFECTO HAZ DE LUZ CONCIERTO ARMY BOMB */
+.light-beams {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  background: radial-gradient(circle at 50% 20%, rgba(199, 125, 255, 0.35) 0%, transparent 65%),
+              conic-gradient(from 180deg at 50% 100%, transparent 40%, rgba(157, 78, 221, 0.3) 48%, rgba(224, 170, 255, 0.4) 50%, rgba(157, 78, 221, 0.3) 52%, transparent 60%);
+}
+
+.light-beams.active {
+  opacity: 1;
+  animation: strobeConcert 2.8s infinite alternate ease-in-out;
+}
+
+@keyframes strobeConcert {
+  0% { transform: scale(1) rotate(-5deg); filter: hue-rotate(0deg); }
+  50% { transform: scale(1.08) rotate(3deg); filter: hue-rotate(25deg); }
+  100% { transform: scale(1) rotate(-3deg); filter: hue-rotate(-20deg); }
+}
+
+/* CONTENEDOR GENERAL */
+.wrapper {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 14px;
+}
+
+.screen {
+  display: none;
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.screen.active {
+  display: block;
+  animation: fadeInScale 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.92) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ========================================================
+   PANTALLA 1: TICKET VIP BTS PARA YOSS
+   ======================================================== */
+.ticket-container {
+  perspective: 1200px;
+  display: flex;
+  justify-content: center;
+}
+
+.ticket-card {
+  width: 100%;
+  max-width: 440px;
+  background: linear-gradient(145deg, rgba(45, 12, 75, 0.9), rgba(18, 5, 35, 0.95));
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 32px 26px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(157, 78, 221, 0.35);
+  backdrop-filter: blur(16px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.ticket-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.8), 0 0 50px rgba(199, 125, 255, 0.5);
+}
+
+.ticket-card::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: linear-gradient(120deg, transparent 35%, rgba(255, 255, 255, 0.12) 48%, rgba(200, 150, 255, 0.25) 50%, transparent 60%);
+  animation: shineSweep 5s infinite;
+  pointer-events: none;
+}
+
+@keyframes shineSweep {
+  0% { transform: translateY(-50%) rotate(25deg); }
+  100% { transform: translateY(50%) rotate(25deg); }
+}
+
+.ticket-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(224, 170, 255, 0.35);
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+}
+
+.bts-logo-svg {
+  width: 32px;
+  height: 38px;
+  color: var(--bts-magenta);
+}
+
+.badge-festa {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: var(--gold-accent);
+  background: rgba(255, 209, 102, 0.12);
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 209, 102, 0.3);
+  font-weight: 700;
+}
+
+.ticket-subtitle {
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  color: var(--bts-magenta);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.ticket-name {
+  font-size: 3.8rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+.glow-purple {
+  background: linear-gradient(135deg, #ffffff 10%, #e0aaff 60%, #c77dff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 16px rgba(199, 125, 255, 0.8));
+}
+
+.ticket-msg {
+  font-size: 0.98rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.ticket-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 28px;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ticket-details span {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  color: rgba(224, 170, 255, 0.7);
+  margin-bottom: 2px;
+}
+
+.ticket-details strong {
+  font-size: 0.92rem;
+  color: #fff;
+}
+
+.ticket-stub {
+  border-top: 1px dashed rgba(224, 170, 255, 0.35);
+  padding-top: 22px;
+}
+
+.glow-btn {
+  width: 100%;
+  padding: 15px 24px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #7b2cbf, #9d4edd, #c77dff);
+  border: 0;
+  border-radius: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 10px 30px rgba(157, 78, 221, 0.6);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.glow-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(199, 125, 255, 0.85);
+}
+
+.glow-btn:active {
+  transform: translateY(1px);
+}
+
+.btn-icon {
+  font-size: 1.25rem;
+  animation: pulseBeat 1.2s infinite;
+}
+
+@keyframes pulseBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+.ticket-hint {
+  font-size: 0.75rem;
+  color: rgba(224, 170, 255, 0.6);
+  margin-top: 10px;
+}
+
+/* ========================================================
+   PANTALLA 2: TARJETA PRINCIPAL FESTA
+   ======================================================== */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(20, 5, 38, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.bts-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: var(--bts-magenta);
+}
+
+.logo-bts.mini, .logo-army.mini {
+  width: 18px;
+  height: 22px;
+  color: var(--neon-glow);
+}
+
+.top-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.control-btn {
+  background: rgba(157, 78, 221, 0.2);
+  border: 1px solid rgba(224, 170, 255, 0.4);
+  color: #fff;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.25s ease;
+}
+
+.control-btn:hover {
+  background: rgba(157, 78, 221, 0.45);
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+
+.control-btn.active {
+  background: linear-gradient(135deg, #7b2cbf, #c77dff);
+  box-shadow: 0 0 20px rgba(199, 125, 255, 0.8);
+}
+
+/* Barra de onda de sonido */
+.sound-wave {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 14px;
+}
+
+.sound-wave span {
+  width: 3px;
+  height: 100%;
+  background: var(--bts-magenta);
+  border-radius: 2px;
+  animation: soundBar 1s ease-in-out infinite alternate;
+}
+
+.sound-wave span:nth-child(1) { animation-delay: 0.1s; }
+.sound-wave span:nth-child(2) { animation-delay: 0.3s; }
+.sound-wave span:nth-child(3) { animation-delay: 0.2s; }
+.sound-wave span:nth-child(4) { animation-delay: 0.4s; }
+
+.control-btn:not(.playing-music) .sound-wave span {
+  animation: none;
+  height: 3px;
+}
+
+@keyframes soundBar {
+  0% { height: 3px; }
+  100% { height: 14px; }
+}
+
+/* TARJETA HERO */
+.hero-card {
+  position: relative;
+  background: linear-gradient(160deg, rgba(36, 12, 60, 0.85) 0%, rgba(15, 4, 30, 0.95) 100%);
+  border: 1px solid var(--glass-border);
+  border-radius: 30px;
+  padding: 34px 24px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 50px rgba(123, 44, 191, 0.35);
+  backdrop-filter: blur(16px);
+  margin-bottom: 30px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #c77dff, #ffd166, #c77dff, transparent);
+}
+
+.anniversary-tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 3px;
+  color: var(--gold-accent);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.main-title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 18px;
+}
+
+.sub-greeting {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--bts-magenta);
+}
+
+.name-highlight {
+  font-size: clamp(3rem, 11vw, 4.8rem);
+  font-weight: 900;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 30%, #e0aaff 60%, #c77dff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 25px rgba(199, 125, 255, 0.85));
+}
+
+.typewriter-box {
+  min-height: 85px;
+  margin: 10px auto 26px;
+  max-width: 600px;
+}
+
+.letter-text {
+  font-size: 1.08rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 400;
+}
+
+/* ========================================================
+   PASTEL DE CUMPLEAÑOS INTERACTIVO
+   ======================================================== */
+.cake-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.cake {
+  position: relative;
+  width: 170px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 22px;
+}
+
+.candles-row {
+  display: flex;
+  gap: 16px;
+  position: absolute;
+  top: 10px;
+  z-index: 5;
+}
+
+.candle {
+  position: relative;
+  width: 10px;
+  height: 32px;
+  background: repeating-linear-gradient(45deg, #fff, #fff 5px, #c77dff 5px, #c77dff 10px);
+  border-radius: 4px 4px 1px 1px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+.wick {
+  position: absolute;
+  top: -6px;
+  left: 4px;
+  width: 2px;
+  height: 6px;
+  background: #333;
+}
+
+.flame {
+  position: absolute;
+  top: -24px;
+  left: -2px;
+  width: 14px;
+  height: 22px;
+  background: radial-gradient(ellipse at bottom, #fff 15%, #ffd166 45%, #ff5400 85%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  filter: drop-shadow(0 0 10px #ffd166) drop-shadow(0 0 18px #ff7b00);
+  animation: flicker 0.4s infinite alternate ease-in-out;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.candle:nth-child(2) .flame { animation-delay: 0.12s; }
+.candle:nth-child(3) .flame { animation-delay: 0.25s; }
+.candle:nth-child(4) .flame { animation-delay: 0.08s; }
+
+@keyframes flicker {
+  0% { transform: scale(1) rotate(-3deg); }
+  100% { transform: scale(1.15, 0.92) rotate(4deg); }
+}
+
+.smoke {
+  position: absolute;
+  top: -20px;
+  left: 2px;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Velas apagadas */
+.cake.extinguished .flame {
+  opacity: 0;
+  transform: scale(0.2);
+}
+
+.cake.extinguished .smoke {
+  animation: smokePuff 1.2s forwards ease-out;
+}
+
+@keyframes smokePuff {
+  0% { opacity: 0.8; transform: translateY(0) scale(1); }
+  50% { opacity: 0.5; transform: translateY(-25px) scale(3.5); filter: blur(3px); }
+  100% { opacity: 0; transform: translateY(-50px) scale(6); filter: blur(6px); }
+}
+
+.cake-tier {
+  width: 100%;
+  position: relative;
+  border-radius: 12px;
+  box-shadow: inset 0 -4px 8px rgba(0,0,0,0.3);
+}
+
+.cake-tier.top {
+  width: 90px;
+  height: 32px;
+  background: linear-gradient(180deg, #f3e8ff 0%, #d8b4fe 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+}
+
+.cake-initial {
+  font-weight: 900;
+  color: #7b2cbf;
+  font-size: 1.1rem;
+}
+
+.cake-tier.mid {
+  width: 130px;
+  height: 36px;
+  background: linear-gradient(180deg, #c084fc 0%, #9333ea 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.ribbon {
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: #fff;
+  font-weight: 700;
+  background: rgba(59, 7, 100, 0.6);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.cake-tier.base {
+  width: 165px;
+  height: 38px;
+  background: linear-gradient(180deg, #7e22ce 0%, #581c87 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.stars-deco {
+  font-size: 0.6rem;
+  color: var(--gold-accent);
+  letter-spacing: 5px;
+}
+
+.cake-plate {
+  width: 195px;
+  height: 12px;
+  background: linear-gradient(90deg, #999, #eee, #fff, #eee, #999);
+  border-radius: 50%;
+  margin-top: -6px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.cake-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.cake-btn {
+  background: linear-gradient(135deg, #6b21a8, #9333ea);
+  color: #fff;
+  border: 1px solid rgba(224, 170, 255, 0.5);
+  padding: 10px 22px;
+  border-radius: 25px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 20px rgba(107, 33, 168, 0.5);
+  transition: all 0.25s ease;
+}
+
+.cake-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(168, 85, 247, 0.7);
+}
+
+.cake-btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: none;
+}
+
+.cake-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.cake-status {
+  font-size: 0.85rem;
+  color: var(--bts-magenta);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+/* ========================================================
+   SECCIÓN DE PHOTOCARDS (7 INTEGRANTES)
+   ======================================================== */
+.photocards-section {
+  margin-bottom: 35px;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.section-heading h2 {
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.section-heading p {
+  font-size: 0.9rem;
+  color: rgba(224, 170, 255, 0.85);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
+
+/* Photocard 3D Flip */
+.photocard {
+  perspective: 1000px;
+  height: 290px;
+  cursor: pointer;
+}
+
+.photocard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+  border-radius: 18px;
+}
+
+.photocard.flipped .photocard-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 18px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--glass-border);
+  overflow: hidden;
+}
+
+/* Frente holográfico */
+.card-front {
+  background: linear-gradient(145deg, rgba(40, 15, 70, 0.85), rgba(18, 5, 32, 0.95));
+}
+
+.card-front::after {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.15) 50%, transparent 60%);
+  transform: rotate(30deg);
+  transition: transform 0.6s ease;
+}
+
+.photocard:hover .card-front::after {
+  transform: rotate(30deg) translate(50%, 50%);
+}
+
+.member-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 10px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, rgba(157, 78, 221, 0.4), rgba(224, 170, 255, 0.2));
+  border: 2px solid var(--bts-magenta);
+  box-shadow: 0 0 20px rgba(199, 125, 255, 0.4);
+}
+
+.member-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  color: var(--gold-accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.member-name {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.member-role {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.flip-hint {
+  font-size: 0.72rem;
+  color: var(--bts-magenta);
+  font-weight: 600;
+}
+
+/* Reverso de la photocard */
+.card-back {
+  background: linear-gradient(145deg, #4a1577, #240046);
+  transform: rotateY(180deg);
+  justify-content: center;
+  text-align: center;
+  padding: 22px 18px;
+}
+
+.back-header {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: var(--gold-accent);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.member-message-text {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #ffffff;
+  font-style: italic;
+  margin-bottom: 14px;
+}
+
+.member-sign {
+  font-weight: 800;
+  color: var(--bts-magenta);
+  font-size: 0.95rem;
+}
+
+/* ========================================================
+   PIE DE TARJETA
+   ======================================================== */
+.card-footer {
+  text-align: center;
+  background: rgba(18, 5, 32, 0.6);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 26px 20px;
+}
+
+.korean-quote {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--bts-magenta);
+  margin-bottom: 14px;
+}
+
+.korean-quote span {
+  display: block;
+  font-family: var(--font-main);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.borahae-message {
+  font-size: 1.05rem;
+  margin-bottom: 12px;
+  color: #f3e8ff;
+}
+
+.footer-bts-sig {
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  color: rgba(224, 170, 255, 0.6);
+  font-weight: 600;
+}
+
+/* ========================================================
+   MODAL Y TOAST
+   ======================================================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 2, 16, 0.75);
+  backdrop-filter: blur(8px);
+  display: none;
+  place-items: center;
+  z-index: 100;
+  padding: 20px;
+}
+
+.modal.active {
+  display: grid;
+  animation: modalFadeIn 0.3s ease forwards;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-box {
+  background: linear-gradient(145deg, #300f54, #150528);
+  border: 1px solid var(--bts-magenta);
+  border-radius: 24px;
+  padding: 32px 24px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(199, 125, 255, 0.5);
+}
+
+.modal-sparkles {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.modal-box h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.modal-box p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+.modal-btn {
+  background: linear-gradient(135deg, #7b2cbf, #c77dff);
+  color: #fff;
+  border: 0;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 20px rgba(199, 125, 255, 0.5);
+}
+
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translate(-50%, 120px);
+  background: rgba(30, 8, 52, 0.95);
+  border: 1px solid var(--bts-magenta);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(199, 125, 255, 0.4);
+  z-index: 100;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.toast.show {
+  transform: translate(-50%, 0);
+}
+
+/* ========================================================
+   RESPONSIVE DESIGN
+   ======================================================== */
+@media (max-width: 600px) {
+  .ticket-name {
+    font-size: 3rem;
+  }
+  .card-header {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .bts-banner {
+    justify-content: center;
+  }
+  .top-controls {
+    justify-content: center;
+  }
+  .hero-card {
+    padding: 26px 16px;
+  }
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
